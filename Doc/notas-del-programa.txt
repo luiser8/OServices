@@ -1,0 +1,34 @@
+USUARIOS
+tesorero:
+Aprueba los pagos los concilia. 
+
+En la tabla de ventas vamos a usar el campo de estado para ayudarnos a saber en el estatus del proceso de la venta 
+Estado:
+En espera: el usuario no ha procesado carrito, el usuario al iniciar sesion podra ver como habia dejado su carrito
+
+Procesado: el usuario a aceptado la compra y cargado los datos del pago. las ventas procesadas son las que el tesorero puede ver para poder revisar el pago (conciliar)
+
+Conciliado: el tesorero revisa las ventas procesadas y ha validado los datos del pago. En este momento se hace la descarga el inventario de las cantidas en los detalles de la venta. O sea se actualiza el inventario disponible de los productos.
+
+Al conciliar se activa la opcion para imprimir el venta (esto se puede imprimir desde el tesorero, administrador o cliente)
+
+Usuario Almacenista: Se encarga de ver los productos y cargar inventario. Tambien puede modificar datos del producto pero No puede cambiar el el precio.
+
+Tenemos que crear una opcion de Cargar el inventario va a ser como el carrito pero una vez que se procesa esto va a sumar inventario actual en la tabla de productos.
+
+Funcion carga de inventario suma al inventario actual de los productos que estan cargados.
+
+
+Clientes
+carga carrito
+imprime sus pedidos una vez que el tesoro los ha validado confirmado.
+
+
+Gerente y administrador son los mismo pero se van a crear ambos.
+
+
+Impresion del Pedido de la Venta:
+Al momento de imprimir la compra y en el detalle del producto aparezcan con su iva y subtotal y total
+
+
+

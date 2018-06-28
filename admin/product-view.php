@@ -30,6 +30,7 @@
                                   <li ng-repeat="item in categorias"><a href="" ng-model="NombreCat">{{item.Nombre}}</a></li>
                                 </ul>
                               </div>
+                              <span>{{NombreCat}}</span>
                         </div>
                             <div class="col-xs-12">
                                 <legend>Datos básicos</legend>

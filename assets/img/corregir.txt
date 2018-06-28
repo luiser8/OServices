@@ -1,0 +1,17 @@
+Colocar 4 secciones en el index (guiarse página consumibles ve)
+
+Agregar más productos
+
+Arreglar el footer
+
+Quitar descuento en tabla producto
+
+Verificar envio mensaje
+
+Verificar Login y Registro Adinistradores y Usuarios
+
+Completar texto en "Lorem ipsum"
+
+Agregar MercadoPago
+
+

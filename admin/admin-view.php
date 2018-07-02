@@ -22,13 +22,26 @@
                 <form action="process/regAdmin.php" method="POST" role="form" class="FormCatElec" data-form="save">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="col-xs-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Nombre de usuario</label>
                                     <input class="form-control" type="text" name="admin-name" maxlength="9" pattern="[a-zA-Z0-9]{4,9}" required="">
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                              <div class="form-group label-floating">
+                                <select class="form-control" name="admin-nivel">
+                                <option value="">Seleccione un nivel</option>
+                                    <?php
+                                        $nivelesc= ejecutarSQL::consultar("SELECT * FROM niveles");
+                                        while($nivelc=mysqli_fetch_array($nivelesc, MYSQLI_ASSOC)){
+                                            echo '<option value="'.$nivelc['CodNivel'].'">'.$nivelc['Nivel'].'</option>';
+                                        }
+                                    ?>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Ingrese la contraseña</label>
                                     <input class="form-control" type="password" name="admin-pass1" required="">

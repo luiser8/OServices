@@ -26,7 +26,8 @@
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Nombre</th>
-                                <th class="text-center">Eliminar</th>
+                                <th class="text-center">Nivel</th>
+                                <th class="text-center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,10 @@
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
                                 $administradores=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM administrador WHERE id!='1' LIMIT $inicio, $regpagina");
+                                $alladmin = mysqli_query($mysqli,"SELECT administrador.*, niveles.* 
+                                                                        FROM administrador 
+                                                                            INNER JOIN niveles on administrador.CodNivel = niveles.CodNivel
+                                                                                WHERE id!='1'");
 
                                 $totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");
                                 $totalregistros = mysqli_fetch_array($totalregistros, MYSQLI_ASSOC);
@@ -46,11 +51,12 @@
                                 $numeropaginas = ceil($totalregistros["FOUND_ROWS()"]/$regpagina);
 
                                 $cr=$inicio+1;
-                              while($adm=mysqli_fetch_array($administradores, MYSQLI_ASSOC)){
+                              while($adm=mysqli_fetch_array($alladmin, MYSQLI_ASSOC)){
                             ?>
                             <tr>
                                 <td class="text-center"><?php echo $cr; ?></td>
                                 <td class="text-center"><?php echo $adm['Nombre']; ?></td>
+                                <td class="text-center"><?php echo $adm['Nivel']; ?></td>
                                 <td class="text-center">
                                     <form action="process/deladmin.php" method="POST" class="FormCatElec" data-form="delete">
                                         <input type="hidden" name="admin-code" value="<?php echo $adm['id']; ?>">

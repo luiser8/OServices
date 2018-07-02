@@ -4,6 +4,7 @@ include '../library/configServer.php';
 include '../library/consulSQL.php';
 
 $nameAdmin=consultasSQL::clean_string($_POST['admin-name']);
+$adminnivel=consultasSQL::clean_string($_POST['admin-nivel']);
 $passAdmin1=consultasSQL::clean_string($_POST['admin-pass1']);
 $passAdmin2=consultasSQL::clean_string($_POST['admin-pass2']);
 
@@ -16,7 +17,7 @@ $passAdminFinal=md5($passAdmin1);
 
 $verificar=ejecutarSQL::consultar("SELECT * FROM administrador WHERE Nombre='".$nameAdmin."'");
 if(mysqli_num_rows($verificar)<=0){
-    if(consultasSQL::InsertSQL("administrador", "Nombre, Clave", "'$nameAdmin','$passAdminFinal'")){
+    if(consultasSQL::InsertSQL("administrador", "Nombre, Clave, CodNivel", "'$nameAdmin','$passAdminFinal', '$adminnivel'")){
         echo '<script>
             swal({
               title: "Administrador registrado",

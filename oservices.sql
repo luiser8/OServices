@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 02, 2018 at 02:47 PM
+-- Generation Time: Jul 02, 2018 at 09:23 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.1.18
 
@@ -29,18 +29,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `administrador` (
-  `id` int(7) NOT NULL,
-  `Nombre` varchar(30) NOT NULL,
-  `Clave` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL,
+  `Nombre` varchar(55) COLLATE utf8_spanish_ci NOT NULL,
+  `Clave` text COLLATE utf8_spanish_ci NOT NULL,
+  `CodNivel` int(10) UNSIGNED NOT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `administrador`
 --
 
-INSERT INTO `administrador` (`id`, `Nombre`, `Clave`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3'),
-(5, 'prueba', '81dc9bdb52d04dc20036dbd8313ed055');
+INSERT INTO `administrador` (`id`, `Nombre`, `Clave`, `CodNivel`, `Fecha`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, '2018-07-02 14:52:40'),
+(2, 'luiser', '81dc9bdb52d04dc20036dbd8313ed055', 3, '2018-07-02 14:57:36'),
+(3, 'carlos', '81dc9bdb52d04dc20036dbd8313ed055', 2, '2018-07-02 15:24:44'),
+(4, 'luiser1', '81dc9bdb52d04dc20036dbd8313ed055', 2, '2018-07-02 17:13:40');
 
 -- --------------------------------------------------------
 
@@ -127,7 +131,31 @@ CREATE TABLE `detalle` (
 --
 
 INSERT INTO `detalle` (`NumPedido`, `CodigoProd`, `CantidadProductos`, `PrecioProd`) VALUES
-(1, 'HG-01', 1, '20000.00');
+(1, 'HG-01', 1, '20000.00'),
+(2, 'HG-01', 1, '20000.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `niveles`
+--
+
+CREATE TABLE `niveles` (
+  `CodNivel` int(11) NOT NULL,
+  `Nivel` varchar(55) COLLATE utf8_spanish_ci NOT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `niveles`
+--
+
+INSERT INTO `niveles` (`CodNivel`, `Nivel`, `Fecha`) VALUES
+(1, 'Administrador del sistema', '2018-07-02 14:31:15'),
+(2, 'Almacenista', '2018-07-02 14:31:15'),
+(3, 'Tesorero', '2018-07-02 14:31:15'),
+(4, 'Gerente de Comercialización', '2018-07-02 14:31:15'),
+(5, 'Gerente de General', '2018-07-02 14:31:15');
 
 -- --------------------------------------------------------
 
@@ -156,7 +184,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id`, `CodigoProd`, `NombreProd`, `CodigoCat`, `Precio`, `Descuento`, `Presentación`, `Marca`, `Stock`, `RIFProveedor`, `Imagen`, `Nombre`, `Estado`) VALUES
-(1, 'HG-01', 'Papel Institucional 9 Pulgadas', '02', '20000.00', 0, 'Bulto de 6 Rollos', 'PAVECA', 99, '305837260', 'HG-01.jpg', 'admin', 'Activo');
+(1, 'HG-01', 'Papel Institucional 9 Pulgadas', '02', '20000.00', 0, 'Bulto de 6 Rollos', 'PAVECA', 19, '305837260', 'HG-01.jpg', 'admin', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -206,7 +234,8 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`NumPedido`, `Fecha`, `RIF`, `TotalPagar`, `Estado`, `NumeroDeposito`, `TipoEnvio`, `NombreEnvio`, `DirEnvio`, `TlfEnvio`, `Adjunto`) VALUES
-(1, '02-07-2018', '16068389', '20000.00', 'Pendiente', '222222222222222', 'Recoger Por Tienda', 'Luis Rondon', 'bna', '04121805865', 'Sin archivo adjunto');
+(1, '02-07-2018', '16068389', '20000.00', 'Pendiente', '222222222222222', 'Recoger Por Tienda', 'Luis Rondon', 'bna', '04121805865', 'Sin archivo adjunto'),
+(2, '02-07-2018', '16068389', '20000.00', 'Pendiente', '222222222222222', 'Recoger Por Tienda', 'Luis Rondon', 'bna', '04121805865', 'Sin archivo adjunto');
 
 -- --------------------------------------------------------
 
@@ -226,7 +255,7 @@ CREATE TABLE `verificado` (
 --
 
 INSERT INTO `verificado` (`CodVerf`, `NumPedido`, `Estado`, `Fecha`) VALUES
-(1, 1, 1, '0000-00-00 00:00:00');
+(3, 1, 1, '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -264,6 +293,12 @@ ALTER TABLE `detalle`
   ADD KEY `CodigoProd` (`CodigoProd`);
 
 --
+-- Indexes for table `niveles`
+--
+ALTER TABLE `niveles`
+  ADD PRIMARY KEY (`CodNivel`);
+
+--
 -- Indexes for table `producto`
 --
 ALTER TABLE `producto`
@@ -299,13 +334,19 @@ ALTER TABLE `verificado`
 -- AUTO_INCREMENT for table `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cuentabanco`
 --
 ALTER TABLE `cuentabanco`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `niveles`
+--
+ALTER TABLE `niveles`
+  MODIFY `CodNivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `producto`
@@ -317,13 +358,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT for table `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `NumPedido` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `NumPedido` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `verificado`
 --
 ALTER TABLE `verificado`
-  MODIFY `CodVerf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `CodVerf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

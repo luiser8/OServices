@@ -1,6 +1,14 @@
-<p class="lead">
+<style>
+  .form-group {
+    padding-bottom: 0px;
+    margin: 0px 0 0 0;
+    margin-left: 10px;
+}
+/*Estilo para reducir espacio del input*/
+</style>
+<!-- <p class="lead">
 	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum voluptates, corporis nisi dolores cumque obcaecati perferendis, quisquam, ipsa commodi labore molestias dolor itaque nam cupiditate totam, ea dicta? Sit, asperiores?
-</p>
+</p> -->
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
         <a href="configAdmin.php?view=product">
@@ -16,9 +24,12 @@
 		<div class="col-xs-12">
             <br><br>
             <div class="panel panel-info">
-              <div class="panel-heading text-center"><h4>Inventario</h4></div>
+              <div class="panel-heading text-center"><h4>Inventario</h4>
+                <!-- Filtro mejor opcion para busqueda -->
+               
+              </div> <input type="text" class="form-control" placeholder="Busca tus productos" id="filtro_productos">
                 <div class="table-responsive">
-                  <table class="table table-striped table-hover">
+                  <table class="table table-striped table-hover" id="tabla_productos">
                       <thead class="">
                           <tr>
                           	  <th class="text-center">#</th>
@@ -141,3 +152,11 @@
         </div>
 	</div>
 </div>
+<script>
+  $("#filtro_productos").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tabla_productos tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
+</script>

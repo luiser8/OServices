@@ -1,6 +1,7 @@
-<p class="lead">
+
+<!-- <p class="lead">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
-</p>
+</p> -->
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
         <a href="configAdmin.php?view=product">
@@ -18,22 +19,25 @@
                 <h3 class="text-primary text-center">Agregar un producto a la tienda</h3>
                 <form action="./process/regproduct.php" method="POST" enctype="multipart/form-data" class="FormCatElec" data-form="save">
                     <div class="container-fluid">
-                        <div class="row" ng-controller="CtrlCategorias">
+                        <div class="row">
                             <div class="col-xs-12 col-md-4">
 
-                              <div class="dropdown">
-                                <button class="btn btn-primary btn-raised dropdown-toggle" type="button" id="drpdowncategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                  Seleccione una categoría &nbsp;
-                                  <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="drpdowncategory">
-                                  <li ng-repeat="item in categorias"><a href="" ng-model="NombreCat">{{item.Nombre}}</a></li>
-                                </ul>
-                              </div>
-                              <span>{{NombreCat}}</span>
                         </div>
                             <div class="col-xs-12">
                                 <legend>Datos básicos</legend>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                              <div class="form-group label-floating">
+                                <select class="form-control" name="prod-categoria">
+                                <option value="">Seleccione una categoria</option>
+                                    <?php
+                                        $categoriac= ejecutarSQL::consultar("SELECT * FROM categoria");
+                                        while($catec=mysqli_fetch_array($categoriac, MYSQLI_ASSOC)){
+                                            echo '<option value="'.$catec['CodigoCat'].'">'.$catec['Nombre'].'</option>';
+                                        }
+                                    ?>
+                                </select>
+                              </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-4">
                               <div class="form-group label-floating">
@@ -71,14 +75,15 @@
                                 <input type="text" class="form-control" required maxlength="20" pattern="[0-9]{1,20}" name="prod-stock">
                               </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
+                            <!-- Inclusion del proveedor -->
+                          <div class="col-xs-12 col-sm-6 col-md-4">
                               <div class="form-group label-floating">
-                                <label class="control-label">Categoría</label>
-                                <select class="form-control" name="prod-categoria">
+                                <select class="form-control" name="prod-codigoP">
+                                <option value="">Seleccione una proveedor</option>
                                     <?php
-                                        $categoriac= ejecutarSQL::consultar("SELECT * FROM categoria");
-                                        while($catec=mysqli_fetch_array($categoriac, MYSQLI_ASSOC)){
-                                            echo '<option value="'.$catec['CodigoCat'].'">'.$catec['Nombre'].'</option>';
+                                        $proveedorc= ejecutarSQL::consultar("SELECT * FROM proveedor");
+                                        while($proveec=mysqli_fetch_array($proveedorc, MYSQLI_ASSOC)){
+                                            echo '<option value="'.$proveec['RIFProveedor'].'">'.$proveec['NombreCompleto'].'</option>';
                                         }
                                     ?>
                                 </select>

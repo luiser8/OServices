@@ -1,6 +1,6 @@
-<p class="lead">
+<!-- <p class="lead">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
-</p>
+</p> -->
 <div class="container">
 	<div class="row">
         <div class="col-xs-12">

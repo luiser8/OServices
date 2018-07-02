@@ -1,6 +1,6 @@
-<p class="lead">
+<!-- <p class="lead">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
-</p>
+</p> -->
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
         <a href="configAdmin.php?view=product">
@@ -58,15 +58,16 @@
                                 <input type="text" class="form-control" value="<?php echo $prod['Precio']; ?>" required maxlength="20" pattern="[0-9.]{1,20}" name="prod-price">
                               </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
+<!--                             <div class="col-xs-12 col-sm-6 col-md-4">
                               <div class="form-group label-floating">
                                 <label class="control-label">Descuento (%)</label>
-                                <input type="text" class="form-control" required maxlength="2" pattern="[0-9]{1,2}" name="prod-desc-price" value="<?php echo $prod['Descuento']; ?>">
+                                <input type="text" class="form-control" required maxlength="2" pattern="[0-9]{1,2}" name="prod-desc-price" value="<?php /*echo $prod['Descuento']; */?>">
                               </div>
-                            </div>
+                            </div> -->
                             <div class="col-xs-12 col-sm-6 col-md-4">
                               <div class="form-group label-floating">
-                                <label class="control-label">Unidades disponibles</label>
+                                <label class="control-label"></b> Unidades disponibles <span class="badge"><?php echo $prod['Stock']; ?></span> <b>Ingresa el nuevo incremento del stock</b></label>
+                                <input type="hidden" name="prod-stock-actual" value="<?php echo $prod['Stock']; ?>">
                                 <input type="text" class="form-control" value="<?php echo $prod['Stock']; ?>" required maxlength="20" pattern="[0-9]{1,20}" name="prod-stock">
                               </div>
                             </div>

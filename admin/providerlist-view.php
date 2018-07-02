@@ -1,6 +1,6 @@
-<p class="lead">
+<!-- <p class="lead">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
-</p>
+</p> -->
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
         <a href="configAdmin.php?view=provider">
@@ -27,8 +27,8 @@
                               	<th class="text-center">Dirección</th>
                               	<th class="text-center">Teléfono</th>
                               	<th class="text-center">Email</th>
-                              	<th class="text-center">Actualizar</th>
-                              	<th class="text-center">Eliminar</th>
+<!--                               	<th class="text-center">Actualizar</th>
+                              	<th class="text-center">Eliminar</th> -->
                           	</tr>
                       	</thead>
                       	<tbody>
@@ -57,16 +57,6 @@
 								<td class="text-center"><?php echo $cli['Direccion']; ?></td>
 								<td class="text-center"><?php echo $cli['Telefono']; ?></td>
 								<td class="text-center"><?php echo $cli['Email']; ?></td>
-								<td class="text-center">
-	                        		<a href="configAdmin.php?view=providerinfo&code=<?php echo $cli['RIF']; ?>" class="btn btn-raised btn-xs btn-success">Actualizar</a>
-	                        	</td>
-	                        	<td class="text-center">
-	                        		<form action="process/delclie.php" method="POST" class="FormCatElec" data-form="delete">
-	                        			<input type="hidden" name="rif-clie" value="<?php echo $cli['RIF']; ?>">
-	                        			<button type="submit" class="btn btn-raised btn-xs btn-danger">Eliminar</button>	
-	                        		</form>
-	                        	</td>
-							</td>
                             <?php
                             	$cr++;
                                 }

@@ -1,6 +1,3 @@
-<p class="lead">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
-</p>
 <div class="container">
   <div class="row">
         <div class="col-xs-12">
@@ -18,6 +15,9 @@
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Estado</th>
                                 <th class="text-center">Envío</th>
+                                <th class="text-center">Nombre cliente</th>
+                                <th class="text-center">Dirección</th>
+                                <th class="text-center">Telefono</th>
                                 <th class="text-center">Opciones</th>
                                 <th class="text-center">Eliminar</th>
                             </tr>
@@ -68,10 +68,20 @@
                                 <a href="./report/factura.php?id=<?php echo $order['NumPedido'];  ?>" class="btn btn-raised btn-xs btn-primary btn-block" target="_blank">Imprimir</a>
                             </td>
                             <td class="text-center">
+                                <?php 
+                                    $verif= ejecutarSQL::consultar("SELECT NumPedido FROM verificado WHERE NumPedido='".$order['NumPedido']."'");
+                                    $pedido=mysqli_fetch_array($verif, MYSQLI_ASSOC);
+                                     
+                                ?>
+                                <?php for($i=0; $i<count($pedido); $i++){ $rs = $pedido[$i];}?>
+                                <?php if($rs['Estado'] == NULL){  ?>
+                                    <a href="#!" class="btn btn-raised btn-xs btn-primary btn-block btn-up-verificar" data-code="<?php echo $order['NumPedido']; ?>">Verificar</a>
+                                <?php } ?>
                               <form action="process/delPedido.php" method="POST" class="FormCatElec" data-form="delete">
                                 <input type="hidden" name="num-pedido" value="<?php echo $order['NumPedido']; ?>">
                                 <button type="submit" class="btn btn-raised btn-xs btn-danger">Eliminar</button>  
                               </form>
+
                             </td>
                             </tr>
                             <?php
@@ -149,6 +159,25 @@
   </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-verificar" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content" style="padding: 15px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h5 class="modal-title text-center text-primary" id="myModalLabel2">Verificación del pedido.</h5>
+        </div>
+        <!-- action="./process/verificarPedido.php" method="POST"  -->
+        <form action="./process/verificarPedido.php" method="POST">
+            <div class="modal-footer">
+                <input type="hidden" id="NumPedido" name="NumPedido">
+              <button type="submit" class="btn btn-success btn-raised btn-sm">Verificado</button>
+              <button type="button" class="btn btn-danger btn-raised btn-sm" data-dismiss="modal">Cancelar</button>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
+
 <script>
     $(document).ready(function(){
         $('.btn-up-order').on('click', function(e){
@@ -168,6 +197,16 @@
             });
             return false;
 
+        });
+        $('.btn-up-verificar').on('click', function(e){
+            var code=$(this).attr('data-code');
+            console.log(code);
+            $('#NumPedido').val(code);
+
+            $('#modal-verificar').modal({
+                    show: true,
+                    backdrop: "static"
+            });
         });
     });
 </script>

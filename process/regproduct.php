@@ -11,9 +11,11 @@
     $marcaProd=consultasSQL::clean_string($_POST['prod-marca']);
     $stockProd=consultasSQL::clean_string($_POST['prod-stock']);
     $codePProd=consultasSQL::clean_string($_POST['prod-codigoP']);
+    //$codePProd = 305837260;
+    $descProd = 0;
     $estadoProd=consultasSQL::clean_string($_POST['prod-estado']);
     $adminProd=consultasSQL::clean_string($_POST['admin-name']);
-    $descProd=consultasSQL::clean_string($_POST['prod-desc-price']);
+    //$descProd=consultasSQL::clean_string($_POST['prod-desc-price']);
     $imgName=$_FILES['img']['name'];
     $imgType=$_FILES['img']['type'];
     $imgSize=$_FILES['img']['size'];

@@ -29,7 +29,7 @@
                 $_SESSION['nombreUser']=$nombre;
                 $_SESSION['claveUser']=$clave;
                 $_SESSION['UserType']="User";
-                $_SESSION['UserNIT']=$filaU['NIT'];
+                $_SESSION['UserNIT']=$filaU['RIF'];
                 echo '<script> location.href="index.php"; </script>';
             }else{
                 echo 'Error nombre o contraseña invalido';

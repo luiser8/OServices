@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 02, 2018 at 09:23 PM
+-- Generation Time: Jul 02, 2018 at 10:07 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.1.18
 
@@ -44,7 +44,9 @@ INSERT INTO `administrador` (`id`, `Nombre`, `Clave`, `CodNivel`, `Fecha`) VALUE
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, '2018-07-02 14:52:40'),
 (2, 'luiser', '81dc9bdb52d04dc20036dbd8313ed055', 3, '2018-07-02 14:57:36'),
 (3, 'carlos', '81dc9bdb52d04dc20036dbd8313ed055', 2, '2018-07-02 15:24:44'),
-(4, 'luiser1', '81dc9bdb52d04dc20036dbd8313ed055', 2, '2018-07-02 17:13:40');
+(4, 'luiser1', '81dc9bdb52d04dc20036dbd8313ed055', 2, '2018-07-02 17:13:40'),
+(5, 'luiser3', '81dc9bdb52d04dc20036dbd8313ed055', 4, '2018-07-02 20:01:51'),
+(6, 'luiser4', '81dc9bdb52d04dc20036dbd8313ed055', 5, '2018-07-02 20:04:38');
 
 -- --------------------------------------------------------
 
@@ -334,7 +336,7 @@ ALTER TABLE `verificado`
 -- AUTO_INCREMENT for table `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cuentabanco`

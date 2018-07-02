@@ -15,6 +15,7 @@
                 $_SESSION['nombreAdmin']=$nombre;
                 $_SESSION['claveAdmin']=$clave;
                 $_SESSION['UserType']="Admin";
+                $_SESSION['Nivel']=$filaU['CodNivel'];
                 $_SESSION['adminID']=$filaU['id'];
                 echo '<script> location.href="index.php"; </script>';
             }else{

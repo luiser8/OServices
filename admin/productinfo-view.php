@@ -55,7 +55,14 @@
                             <div class="col-xs-12 col-sm-6 col-md-4">
                               <div class="form-group label-floating">
                                 <label class="control-label">Precio</label>
-                                <input type="text" class="form-control" value="<?php echo $prod['Precio']; ?>" required maxlength="20" pattern="[0-9.]{1,20}" name="prod-price">
+                                
+                                    <input type="text" 
+                                            class="form-control" 
+                                            value="<?php echo $prod['Precio']; ?>" 
+                                            required maxlength="20" pattern="[0-9.]{1,20}" 
+                                            name="prod-price" 
+                                            <?php if($_SESSION['Nivel'] != 1){ echo "readonly"; }?> />
+                                
                               </div>
                             </div>
 <!--                             <div class="col-xs-12 col-sm-6 col-md-4">

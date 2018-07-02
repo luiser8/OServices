@@ -11,7 +11,9 @@
 </p> -->
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
-        <a href="configAdmin.php?view=product">
+        <?php if($_SESSION['Nivel'] == 1){ ?>
+          <a href="configAdmin.php?view=product">
+        <?php } ?>
             <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo producto
         </a>
     </li>
@@ -40,10 +42,11 @@
                               <th class="text-center">Presentación</th>
                               <th class="text-center">Marca</th>
                               <th class="text-center">Stock</th>
-                              <th class="text-center"></th>
                               <th class="text-center">Estado</th>
-                              <th class="text-center">Actualizar</th>
-                              <th class="text-center">Eliminar</th>
+                              <?php if($_SESSION['Nivel'] == 1){ ?>
+                                <th class="text-center">Actualizar</th>
+                                <th class="text-center">Eliminar</th>
+                              <?php } ?>
                           </tr>
                       </thead>
                       <tbody>
@@ -79,22 +82,32 @@
                         	<td class="text-center"><?php echo $prod['Precio']; ?></td>
                         	<td class="text-center"><?php echo $prod['Presentación']; ?></td>
                         	<td class="text-center"><?php echo $prod['Marca']; ?></td>
-                        	<td class="text-center"><?php echo $prod['Stock']; ?></td>
+                          <?php if($prod['Stock'] <= 10){ ?>
+                        	<td class="text-center" style="background: #E6EE9C;">
+                            <?php 
+                                echo $prod['Stock']; 
+                            ?>
+                          </td>
+                           <?php }else{ ?>
                         	<td class="text-center">
-                        		
-                        	</td>
+                        		<?php echo $prod['Stock']; ?>
+                        	</td><?php } ?>
                         	<td class="text-center">
                         		<?php echo $prod['Estado']; ?>
                         	</td>
                         	<td class="text-center">
-                        		<a href="configAdmin.php?view=productinfo&code=<?php echo $prod['CodigoProd']; ?>" class="btn btn-raised btn-xs btn-success">Actualizar</a>
-                        	</td>
+                        	 <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2){ ?>	
+                            <a href="configAdmin.php?view=productinfo&code=<?php echo $prod['CodigoProd']; ?>" class="btn btn-raised btn-xs btn-success">Actualizar</a>
+                        	 <?php } ?>
+                          </td>
+                          <?php if($_SESSION['Nivel'] == 1){  ?>
                         	<td class="text-center">
                         		<form action="process/delprod.php" method="POST" class="FormCatElec" data-form="delete">
                         			<input type="hidden" name="prod-code" value="<?php echo $prod['CodigoProd']; ?>">
                         			<button type="submit" class="btn btn-raised btn-xs btn-danger">Eliminar</button>	
                         		</form>
                         	</td>
+                          <?php } ?>
                         </tr>
                         <?php 
                         	$cr++;

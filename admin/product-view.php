@@ -12,6 +12,7 @@
         <a href="configAdmin.php?view=productlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Inventario</a>
     </li>
 </ul>
+<?php if($_SESSION['Nivel'] == 1){ ?>
 <div class="container" ng-app="Oservices">
 	<div class="row">
         <div class="col-xs-12">
@@ -127,3 +128,4 @@
         </div>     
     </div>
 </div>
+<?php } ?>

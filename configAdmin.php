@@ -18,36 +18,48 @@
           </div>
           <!--====  Nav Tabs  ====-->
           <ul class="nav nav-tabs nav-justified" style="margin-bottom: 15px;">
+            <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2){ ?>
             <li>
               <a href="configAdmin.php?view=product">
                 <i class="fa fa-cubes" aria-hidden="true"></i> &nbsp; Productos
               </a>
             </li>
+          <?php } ?>
+          <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2){ ?>
             <li>
               <a href="configAdmin.php?view=provider">
                 <i class="fa fa-truck" aria-hidden="true"></i> &nbsp; Clientes
               </a>
             </li>
+            <?php } ?>
+            <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2){ ?>
             <li>
               <a href="configAdmin.php?view=category">
                 <i class="fa fa-shopping-basket" aria-hidden="true"></i> &nbsp; Categorías
               </a>
             </li>
+            <?php } ?>
+            <?php if($_SESSION['Nivel'] == 1){ ?>
             <li>
               <a href="configAdmin.php?view=admin">
                 <i class="fa fa-users" aria-hidden="true"></i> &nbsp; Administradores
               </a>
             </li>
+            <?php } ?>
+            <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2 || $_SESSION['Nivel'] == 3){ ?>
             <li>
               <a href="configAdmin.php?view=order">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Pedidos
               </a>
             </li>
+            <?php } ?>
+            <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2){ ?>
             <li>
               <a href="configAdmin.php?view=bank">
                 <i class="fa fa-university" aria-hidden="true"></i> &nbsp; Cuenta bancaria
               </a>
             </li>
+            <?php } ?>
             <li>
               <a href="configAdmin.php?view=account">
                 <i class="fa fa-address-card" aria-hidden="true"></i> &nbsp; Mi cuenta

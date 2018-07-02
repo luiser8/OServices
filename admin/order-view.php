@@ -19,7 +19,9 @@
                                 <th class="text-center">Dirección</th>
                                 <th class="text-center">Telefono</th>
                                 <th class="text-center">Opciones</th>
+                                <?php if($_SESSION['Nivel'] == 1){  ?>
                                 <th class="text-center">Eliminar</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,11 +80,12 @@
                                 <?php if($verif->num_rows != 1){  ?>
                                     <a href="#!" class="btn btn-raised btn-xs btn-primary btn-block btn-up-verificar" data-code="<?php echo $order['NumPedido']; ?>">Verificar</a>
                                 <?php } ?>
+                                <?php if($_SESSION['Nivel'] == 1){  ?>
                               <form action="process/delPedido.php" method="POST" class="FormCatElec" data-form="delete">
                                 <input type="hidden" name="num-pedido" value="<?php echo $order['NumPedido']; ?>">
                                 <button type="submit" class="btn btn-raised btn-xs btn-danger">Eliminar</button>  
                               </form>
-
+                                <?php } ?>
                             </td>
                             </tr>
 

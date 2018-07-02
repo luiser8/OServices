@@ -41,7 +41,13 @@
                                 $cr=$inicio+1;
                               while($order=mysqli_fetch_array($pedidos, MYSQLI_ASSOC)){
                             ?>
-                            <tr>
+                                <?php 
+                                    $verif= ejecutarSQL::consultar("SELECT NumPedido FROM verificado WHERE NumPedido='".$order['NumPedido']."'");
+                                    $pedido=mysqli_fetch_array($verif, MYSQLI_ASSOC);
+                                ?>
+                            <?php if($verif->num_rows == 1){  ?>
+                            <tr style="background: #DCEDC8;">
+                            <?php } ?>
                               <td class="text-center"><?php echo $cr; ?></td>
                             <td class="text-center"><?php echo $order['NumeroDeposito']; ?></td>
                             <td class="text-center"><?php echo $order['Fecha']; ?></td>
@@ -68,10 +74,7 @@
                                 <a href="./report/factura.php?id=<?php echo $order['NumPedido'];  ?>" class="btn btn-raised btn-xs btn-primary btn-block" target="_blank">Imprimir</a>
                             </td>
                             <td class="text-center">
-                                <?php 
-                                    $verif= ejecutarSQL::consultar("SELECT NumPedido FROM verificado WHERE NumPedido='".$order['NumPedido']."'");
-                                    $pedido=mysqli_fetch_array($verif, MYSQLI_ASSOC);
-                                ?>
+
                                 <?php if($verif->num_rows != 1){  ?>
                                     <a href="#!" class="btn btn-raised btn-xs btn-primary btn-block btn-up-verificar" data-code="<?php echo $order['NumPedido']; ?>">Verificar</a>
                                 <?php } ?>
@@ -82,6 +85,7 @@
 
                             </td>
                             </tr>
+
                             <?php
                               $cr++;
                               }

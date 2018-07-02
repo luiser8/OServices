@@ -71,10 +71,8 @@
                                 <?php 
                                     $verif= ejecutarSQL::consultar("SELECT NumPedido FROM verificado WHERE NumPedido='".$order['NumPedido']."'");
                                     $pedido=mysqli_fetch_array($verif, MYSQLI_ASSOC);
-                                     
                                 ?>
-                                <?php for($i=0; $i<count($pedido); $i++){ $rs = $pedido[$i];}?>
-                                <?php if($rs['Estado'] == NULL){  ?>
+                                <?php if($verif->num_rows != 1){  ?>
                                     <a href="#!" class="btn btn-raised btn-xs btn-primary btn-block btn-up-verificar" data-code="<?php echo $order['NumPedido']; ?>">Verificar</a>
                                 <?php } ?>
                               <form action="process/delPedido.php" method="POST" class="FormCatElec" data-form="delete">

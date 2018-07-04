@@ -17,8 +17,11 @@
             <br><br>
             <div class="panel panel-info">
                 <div class="panel-heading text-center"><h4>Categorías de productos</h4></div>
+                <div class="form-group filtro">
+                  <input type="text" class="form-control filtro" placeholder="Busca tus categorias" id="filtro_categorias">
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" id="tabla_categorias">
                         <thead class="">
                             <tr>
                             	<th class="text-center">#</th>
@@ -119,3 +122,11 @@
         </div>
 	</div>
 </div>
+<script>
+  $("#filtro_categorias").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tabla_categorias tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
+</script>

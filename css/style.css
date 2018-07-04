@@ -158,3 +158,8 @@ footer a{
     background-color: #fff;
     min-height: 900px;
 }
+/* ========================================= filtros input styles ======================================*/
+.filtro{
+    padding-left: 7px;
+    margin: 0px 0 0 0;
+}

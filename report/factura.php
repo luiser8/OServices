@@ -87,22 +87,30 @@ while($fila1 = mysqli_fetch_array($sDet, MYSQLI_ASSOC)){
     $consulta=ejecutarSQL::consultar("SELECT * FROM producto WHERE CodigoProd='".$fila1['CodigoProd']."'");
     $fila=mysqli_fetch_array($consulta, MYSQLI_ASSOC);
     $pdf->Ln();
-        $pdf->Cell (12,8,utf8_decode($fila1['CantidadProductos']),1,0,'C');
+    $pdf->Cell (12,8,utf8_decode($fila1['CantidadProductos']),1,0,'C');
     $pdf->Cell (59,8,utf8_decode($fila['NombreProd']),1,0,'L');
     $pdf->Cell (46,8,utf8_decode($fila['Presentación']),1,0,'L');
     $pdf->Cell (28,8,utf8_decode($fila['Marca']),1,0,'L');
-    $pdf->Cell (26,8,utf8_decode('$'.$fila1['PrecioProd']),1,0,'L');
-    $pdf->Cell (26,8,utf8_decode('$'.$fila1['PrecioProd']*$fila1['CantidadProductos']),1,0,'L');
+    //Con formatos
+    $precio = number_format($fila1['PrecioProd'], 2, '.', '');
+    $subtotalCalc = $fila1['PrecioProd']*$fila1['CantidadProductos'];
+    $subtotal = number_format($subtotalCalc, 2, '.', '');
+
+    $pdf->Cell (26,8,utf8_decode('$'.$precio),1,0,'L');
+    $pdf->Cell (26,8,utf8_decode('$'.$subtotal),1,0,'L');
     // $pdf->Ln(10);
     $suma += $fila1['PrecioProd']*$fila1['CantidadProductos'];
 
-    $pdf->Ln();
-        $Ok = number_format($suma, 2, '.', '');
-        $pdf->Cell(197,10,"Total a pagar $({$Ok})",1,0,'R');
-        $pdf->Ln();
+
 
     mysqli_free_result($consulta);
-}
+}    
+    $pdf->Ln();
+    $Ok = number_format($suma, 2, '.', '');
+    $iva = ($Ok * 12) / 100;
+    $total = $Ok + $iva; 
+    $pdf->Cell(197,10,"Total a pagar $({$total})",1,0,'R');
+    $pdf->Ln();
 // $pdf->SetFont("Times","b",12);
 // $pdf->Cell (76,10,utf8_decode(''),1,0,'C');
 // $pdf->Cell (30,10,utf8_decode(''),1,0,'C');

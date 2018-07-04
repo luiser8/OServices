@@ -9,7 +9,6 @@ include './library/consulSQL.php';
     <title>Productos</title>
     <?php include './inc/link.php'; ?>
 </head>
-
 <body id="container-page-product">
     <?php include './inc/navbar.php'; ?>
     <section id="infoproduct">

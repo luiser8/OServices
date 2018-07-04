@@ -4,8 +4,11 @@
             <br><br>
             <div class="panel panel-info">
                 <div class="panel-heading text-center"><h4>Pedidos de la tienda</h4></div>
+                <div class="form-group filtro">
+                  <input type="text" class="form-control filtro" placeholder="Busca tus pedidos" id="filtro_pedido">
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" id="tabla_pedido">
                         <thead class="">
                             <tr>
                               <th class="text-center">#</th>
@@ -78,7 +81,7 @@
                             <td class="text-center">
 
                                 <?php if($verif->num_rows != 1){  ?>
-                                    <a href="#!" class="btn btn-raised btn-xs btn-primary btn-block btn-up-verificar" data-code="<?php echo $order['NumPedido']; ?>">Verificar</a>
+                                    <a href="#!" class="btn btn-raised btn-xs btn-primary btn-block btn-up-verificar" data-rif="<?php echo $order['RIF']; ?>" data-code="<?php echo $order['NumPedido']; ?>">Verificar</a>
                                 <?php } ?>
                                 <?php if($_SESSION['Nivel'] == 1){  ?>
                               <form action="process/delPedido.php" method="POST" class="FormCatElec" data-form="delete">
@@ -175,6 +178,7 @@
         <form action="./process/verificarPedido.php" method="POST">
             <div class="modal-footer">
                 <input type="hidden" id="NumPedido" name="NumPedido">
+                <input type="hidden" id="rif" name="RIF">
               <button type="submit" class="btn btn-success btn-raised btn-sm">Verificado</button>
               <button type="button" class="btn btn-danger btn-raised btn-sm" data-dismiss="modal">Cancelar</button>
             </div>
@@ -188,6 +192,7 @@
         $('.btn-up-order').on('click', function(e){
             e.preventDefault();
             var code=$(this).attr('data-code');
+            var rif=$(this).attr('data-rif');
             $.ajax({
                 url:'./process/checkOrder.php',
                 type: 'POST',
@@ -205,8 +210,10 @@
         });
         $('.btn-up-verificar').on('click', function(e){
             var code=$(this).attr('data-code');
+            var rif=$(this).attr('data-rif');
             console.log(code);
             $('#NumPedido').val(code);
+            $('#rif').val(rif);
 
             $('#modal-verificar').modal({
                     show: true,
@@ -214,4 +221,10 @@
             });
         });
     });
+  $("#filtro_pedido").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tabla_pedido tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
 </script>

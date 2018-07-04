@@ -3,6 +3,7 @@
     session_start();
 	include '../library/configServer.php';
 	include '../library/consulSQL.php';
+	consultasSQL::DeleteSQL('carrito', "CodigoProd='".$_POST['codigo']."'");
     $codigo=consultasSQL::clean_string($_POST['codigo']);
     unset($_SESSION['carro'][$codigo]);
     echo '<script> window.location="carrito.php"; </script>';

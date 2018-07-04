@@ -28,8 +28,10 @@
             <div class="panel panel-info">
               <div class="panel-heading text-center"><h4>Inventario</h4>
                 <!-- Filtro mejor opcion para busqueda -->
-               
-              </div> <input type="text" class="form-control" placeholder="Busca tus productos" id="filtro_productos">
+              </div> 
+              <div class="form-group filtro">
+                <input type="text" class="form-control" placeholder="Busca tus productos" id="filtro_productos">
+              </div>
                 <div class="table-responsive">
                   <table class="table table-striped table-hover" id="tabla_productos">
                       <thead class="">

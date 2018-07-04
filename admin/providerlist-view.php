@@ -17,8 +17,11 @@
             <br><br>
             <div class="panel panel-info">
                 <div class="panel-heading text-center"><h4>Lista de Clientes</h4></div>
+                <div class="form-group filtro">
+                  <input type="text" class="form-control filtro" placeholder="Busca tus clientes" id="filtro_clientes">
+                </div>
               	<div class="table-responsive">
-                  <table class="table table-striped table-hover">
+                  <table class="table table-striped table-hover" id="tabla_clientes">
                       	<thead>
                           	<tr>
 								<th class="text-center">#</th>
@@ -113,3 +116,11 @@
         </div>
 	</div>
 </div>
+<script>
+  $("#filtro_clientes").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tabla_clientes tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
+</script>

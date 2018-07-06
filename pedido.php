@@ -102,7 +102,7 @@
                                             <td><?php echo $rw['TlfEnvio']; ?></td>
                                             <td>
                                               <?php if($rw['Estado'] == 'Entregado'){ ?>
-                                              <a href="./report/factura.php?id=<?php echo $order['NumPedido'];  ?>" class="btn btn-raised btn-xs btn-primary btn-block" target="_blank">Imprimir</a>
+                                              <a href="./report/compra.php?id=<?php echo $rw['NumPedido'];  ?>" class="btn btn-raised btn-xs btn-primary btn-block" target="_blank">Imprimir</a>
                                               <?php } ?>
                                             </td>
                                         </tr>

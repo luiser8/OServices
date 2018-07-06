@@ -8,7 +8,7 @@ $Cliente = isset($_POST['RIF']) ? $_POST['RIF'] : '';
 
 if(consultasSQL::InsertSQL("verificado", "CodVerf, NumPedido, Estado, Fecha", "'NULL','{$NumPedido}', '1','NULL'")){
 	consultasSQL::DeleteSQL('carrito', "Cliente='".$Cliente."'");
-	consultasSQL::UpdateSQL("venta", "Estado='verificado'", "NumPedido='$NumPedido'");
+	consultasSQL::UpdateSQL("venta", "Estado='Entregado'", "NumPedido='$NumPedido'");
   header('Location: ../configAdmin.php?view=order');
 }else{
   echo '<script>swal("ERROR", "Ocurrió un error inesperado, por favor intente nuevamente", "error");</script>';

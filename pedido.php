@@ -45,7 +45,7 @@
         </div>
         <?php
             if($_SESSION['UserType']=="User"){
-                $consultaC=ejecutarSQL::consultar("SELECT * FROM venta WHERE RIF='".$_SESSION['UserRIF']."'");
+                $consultaC=ejecutarSQL::consultar("SELECT * FROM venta WHERE RIF='".$_SESSION['UserNIT']."'");
         ?>
             <div class="container" style="margin-top: 70px;">
               <div class="page-header">
@@ -65,6 +65,10 @@
                                         <th>Total</th>
                                         <th>Estado</th>
                                         <th>Envío</th>
+                                        <th>Destinatario</th>
+                                        <th>Dirección</th>
+                                        <th>Telefono</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,6 +100,11 @@
                                             <td><?php echo $rw['NombreEnvio']; ?></td>
                                             <td><?php echo $rw['DirEnvio']; ?></td>
                                             <td><?php echo $rw['TlfEnvio']; ?></td>
+                                            <td>
+                                              <?php if($rw['Estado'] == 'Entregado'){ ?>
+                                              <a href="./report/factura.php?id=<?php echo $order['NumPedido'];  ?>" class="btn btn-raised btn-xs btn-primary btn-block" target="_blank">Imprimir</a>
+                                              <?php } ?>
+                                            </td>
                                         </tr>
                                     <?php
                                     }

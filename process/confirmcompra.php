@@ -83,6 +83,7 @@ if(mysqli_num_rows($verdata)>=1){
       
       /*Vaciando el carrito*/
       unset($_SESSION['carro']);
+      consultasSQL::DeleteSQL('carrito', "Cliente='".$Cedclien."'");
       echo '<script>
       swal({
         title: "Pedido realizado",

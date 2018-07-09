@@ -11,7 +11,7 @@ $password2=consultasSQL::clean_string($_POST['admin-pass2']);
 
 $finalname=$nameold;
 if($nameold!=$name){
-	$verificar=ejecutarSQL::consultar("SELECT * FROM administrador WHERE Nombre='".$name."'");
+	$verificar=ejecutarSQL::consultar("SELECT * FROM usuarios WHERE Nombre='".$name."'");
 	if(mysqli_num_rows($verificar)<=0){
 		$finalname=$name;
 	}else{
@@ -33,7 +33,7 @@ if($password1!="" && $password2!=""){
 }
 
 
-if(consultasSQL::UpdateSQL("administrador", $campos, "id='$code'")){
+if(consultasSQL::UpdateSQL("usuarios", $campos, "id='$code'")){
     echo '<script>
         swal({
           title: "Administrador actualizado",
@@ -54,7 +54,7 @@ if(consultasSQL::UpdateSQL("administrador", $campos, "id='$code'")){
           }
         });
     </script>';
-    $_SESSION['nombreAdmin']=$finalname;
+    $_SESSION['nombre']=$finalname;
 }else{
    echo '<script>swal("ERROR", "Ocurrió un error inesperado, por favor intente nuevamente", "error");</script>';
 }

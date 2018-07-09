@@ -7,11 +7,11 @@
             <div class="container-form-admin">
                 <h3 class="text-info text-center">Actualizar cuenta</h3>
                 <?php
-                	$admin=ejecutarSQL::consultar("SELECT * FROM administrador WHERE id='".$_SESSION['adminID']."'");
+                	$admin=ejecutarSQL::consultar("SELECT * FROM usuarios WHERE id='".$_SESSION['id']."'");
                 	$dataAdmin=mysqli_fetch_array($admin, MYSQLI_ASSOC);
                 ?>
                 <form action="./process/updateAdmin.php" method="POST" role="form" class="FormCatElec" data-form="update">
-                	<input type="hidden" name="admin-code" value="<?php echo $_SESSION['adminID']; ?>">
+                	<input type="hidden" name="admin-code" value="<?php echo $_SESSION['id']; ?>">
                 	<input type="hidden" name="admin-name-old" value="<?php echo $dataAdmin['Nombre']; ?>">
                     <div class="container-fluid">
                         <div class="row">

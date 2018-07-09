@@ -11,7 +11,7 @@
 </p> -->
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
-        <?php if($_SESSION['Nivel'] == 1){ ?>
+        <?php if($_SESSION['Nivel'] == 1 ||$_SESSION['Nivel'] == 4 ||$_SESSION['Nivel'] == 5){ ?>
           <a href="configAdmin.php?view=product">
         <?php } ?>
             <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo producto
@@ -45,7 +45,7 @@
                               <th class="text-center">Marca</th>
                               <th class="text-center">Stock</th>
                               <th class="text-center">Estado</th>
-                              <?php if($_SESSION['Nivel'] == 1){ ?>
+                              <?php if($_SESSION['Nivel'] == 1 ||$_SESSION['Nivel'] == 4 ||$_SESSION['Nivel'] == 5){ ?>
                                 <th class="text-center">Actualizar</th>
                                 <th class="text-center">Eliminar</th>
                               <?php } ?>
@@ -98,11 +98,11 @@
                         		<?php echo $prod['Estado']; ?>
                         	</td>
                         	<td class="text-center">
-                        	 <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 2){ ?>	
+                        	 <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 4 || $_SESSION['Nivel'] == 5){ ?>	
                             <a href="configAdmin.php?view=productinfo&code=<?php echo $prod['CodigoProd']; ?>" class="btn btn-raised btn-xs btn-success">Actualizar</a>
                         	 <?php } ?>
                           </td>
-                          <?php if($_SESSION['Nivel'] == 1){  ?>
+                          <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 4 || $_SESSION['Nivel'] == 5){  ?>
                         	<td class="text-center">
                         		<form action="process/delprod.php" method="POST" class="FormCatElec" data-form="delete">
                         			<input type="hidden" name="prod-code" value="<?php echo $prod['CodigoProd']; ?>">

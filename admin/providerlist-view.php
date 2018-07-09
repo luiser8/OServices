@@ -1,14 +1,12 @@
-<!-- <p class="lead">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
-</p> -->
+
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
         <a href="configAdmin.php?view=provider">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo Cliente
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo Proveedor
         </a>
     </li>
     <li>
-        <a href="configAdmin.php?view=providerlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Lista de Clientes</a>
+        <a href="configAdmin.php?view=providerlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Lista de Proveedores</a>
     </li>
 </ul>
 <div class="container">
@@ -16,9 +14,9 @@
 		<div class="col-xs-12">
             <br><br>
             <div class="panel panel-info">
-                <div class="panel-heading text-center"><h4>Lista de Clientes</h4></div>
+                <div class="panel-heading text-center"><h4>Lista de Proveedores</h4></div>
                 <div class="form-group filtro">
-                  <input type="text" class="form-control filtro" placeholder="Busca tus clientes" id="filtro_clientes">
+                  <input type="text" class="form-control filtro" placeholder="Buscar proveeedor" id="filtro_clientes">
                 </div>
               	<div class="table-responsive">
                   <table class="table table-striped table-hover" id="tabla_clientes">
@@ -30,8 +28,10 @@
                               	<th class="text-center">Dirección</th>
                               	<th class="text-center">Teléfono</th>
                               	<th class="text-center">Email</th>
-<!--                               	<th class="text-center">Actualizar</th>
-                              	<th class="text-center">Eliminar</th> -->
+                                 <?php if($_SESSION['Nivel'] == 1 ||$_SESSION['Nivel'] == 5){ ?>
+                                <th class="text-center">Actualizar</th>
+                                <th class="text-center">Eliminar</th>
+                                <?php } ?>                               	
                           	</tr>
                       	</thead>
                       	<tbody>
@@ -43,7 +43,7 @@
 								$regpagina = 30;
 								$inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-								$clientes=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM cliente LIMIT $inicio, $regpagina");
+								$clientes=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM proveedor LIMIT $inicio, $regpagina");
 
 								$totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");
 								$totalregistros = mysqli_fetch_array($totalregistros, MYSQLI_ASSOC);
@@ -55,15 +55,28 @@
                             ?>
 							<tr>
 								<td class="text-center"><?php echo $cr; ?></td>
-								<td class="text-center"><?php echo $cli['RIF']; ?></td>
+								<td class="text-center"><?php echo $cli['RIFProveedor']; ?></td>
 								<td class="text-center"><?php echo $cli['NombreCompleto']; ?></td>
 								<td class="text-center"><?php echo $cli['Direccion']; ?></td>
 								<td class="text-center"><?php echo $cli['Telefono']; ?></td>
 								<td class="text-center"><?php echo $cli['Email']; ?></td>
-                            <?php
-                            	$cr++;
-                                }
-                            ?>
+                            <td class="text-center">
+                        	 
+                                <?php  
+                             //$cr+=1;
+
+                             if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 5){ ?>	
+                                <a href="configAdmin.php?view=providerinfo&code=<?php echo $cli['RIFProveedor']; ?>" class="btn btn-raised btn-xs btn-success">Actualizar</a>
+                        	    <?php } ?>
+                            </td>
+                            <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 5){  ?>
+                        	<td class="text-center">
+                        		<form action="process/delprove.php" method="POST" class="FormCatElec" data-form="delete">
+                        			<input type="hidden" name="rif-prove" value="<?php echo $cli['RIFProveedor']; ?>">
+                        			<button type="submit" class="btn btn-raised btn-xs btn-danger">Eliminar</button>	
+                        		</form>
+                        	</td>
+                            <?php } }?>
                       	</tbody>
                   </table>
               	</div>

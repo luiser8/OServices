@@ -45,7 +45,7 @@
 	}
 
 	if(consultasSQL::UpdateSQL("cliente", $campos, "RIF='$RIF'")){
-		$_SESSION['nombreUser']=$user;
+		$_SESSION['nombre']=$user;
 		echo '<script>
 		  swal({
 		    title: "Datos actualizados",

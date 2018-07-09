@@ -11,7 +11,7 @@ $emailProve=consultasSQL::clean_string($_POST['prove-email']);
 
 $verificar=  ejecutarSQL::consultar("SELECT * FROM proveedor WHERE RIFProveedor='".$rifProve."'");
 if(mysqli_num_rows($verificar)<=0){
-    if(consultasSQL::InsertSQL("proveedor", "RIFProveedor, NombreProveedor, Direccion, Telefono, EmailProv", "'$rifProve','$nameProve','$dirProve','$telProve','$emailProve'")){
+    if(consultasSQL::InsertSQL("proveedor", "RIFProveedor, NombreCompleto, Direccion, Telefono, Email", "'$rifProve','$nameProve','$dirProve','$telProve','$emailProve'")){
         echo '<script>
             swal({
               title: "Proveedor registrado",

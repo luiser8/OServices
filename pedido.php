@@ -17,8 +17,8 @@
                 <?php
                   require_once "library/configServer.php";
                   require_once "library/consulSQL.php";
-                  if($_SESSION['UserType']=="Admin" || $_SESSION['UserType']=="User"){
-                    if(isset($_SESSION['carro'])){
+                  if($_SESSION['Nivel']=="2"){
+                    if($_SESSION['carro']){
                 ?>
                       <br><br><br>
                       <div class="container-fluid">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <?php
-            if($_SESSION['UserType']=="User"){
+            if($_SESSION['Nivel']=="2"){
                 $consultaC=ejecutarSQL::consultar("SELECT * FROM venta WHERE RIF='".$_SESSION['UserNIT']."'");
         ?>
             <div class="container" style="margin-top: 70px;">
@@ -87,9 +87,12 @@
                                                 case 'Pendiente':
                                                   echo "En espera";
                                                   break;
+                                                case 'Verificado':
+                                                  echo "Verificado";
+                                                  break;
                                                 case 'Entregado':
                                                   echo "Entregado";
-                                                  break;
+                                                  break;                                                  
                                                 default:
                                                   echo "Sin informacion";
                                                   break;
@@ -101,7 +104,7 @@
                                             <td><?php echo $rw['DirEnvio']; ?></td>
                                             <td><?php echo $rw['TlfEnvio']; ?></td>
                                             <td>
-                                              <?php if($rw['Estado'] == 'Entregado'){ ?>
+                                              <?php if($rw['Estado'] == 'Verificado'){ ?>
                                               <a href="./report/compra.php?id=<?php echo $rw['NumPedido'];  ?>" class="btn btn-raised btn-xs btn-primary btn-block" target="_blank">Imprimir</a>
                                               <?php } ?>
                                             </td>
@@ -213,7 +216,7 @@
                              <input class="form-control" type="tel" required name="tlf-envio" maxlength="15" title="Ingrese un número telefónico.">
                         </div>
                    </div>
-                    <input type="hidden" name="Cedclien" value="<?php echo $_SESSION['UserRIF']; ?>">
+                    <input type="hidden" name="Cedclien" value="<?php echo $_SESSION['UserNIT']; ?>">
                     <div class="form-group">
                       <input type="file" name="comprobante">
                       <div class="input-group">

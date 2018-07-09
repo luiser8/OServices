@@ -7,14 +7,19 @@ $tipoenvio=consultasSQL::clean_string($_POST['tipo-envio']);
 $nombreenvio=consultasSQL::clean_string($_POST['nombre-envio']);
 $direnvio=consultasSQL::clean_string($_POST['dir-envio']);
 $tlfenvio=consultasSQL::clean_string($_POST['tlf-envio']);
-$Cedclien=/*consultasSQL::clean_string($_POST['Cedclien'])*/$_SESSION['UserNIT'];
+$Cedclien=$_SESSION['UserNIT'];
 $comprobanteTMP=$_FILES['comprobante']['tmp_name'];
 $comprobanteName=$_FILES['comprobante']['name'];
+//$comprobanteType=$_FILES['comprobante']['type'];
 $comprobanteMaxSize=5120;
 $comprobanteDir="../assets/comprobantes/";
 
-$verdata=ejecutarSQL::consultar("SELECT * FROM cliente WHERE RIF='".$Cedclien."'");
-if(mysqli_num_rows($verdata)>=1){
+$consulta=ejecutarSQL::consultar("SELECT numpedido + 1 AS proxVenta FROM venta
+                                  ORDER BY numpedido DESC LIMIT 1");
+$verData=mysqli_fetch_array($consulta, MYSQLI_ASSOC);
+$proximaVenta=$verData['proxVenta'];             
+
+if($_SESSION['carro']) { 
   if(!empty($comprobanteType)){
     if($comprobanteType=="image/jpeg" || $comprobanteType=="image/png"){
       if(($comprobanteSize/1024)<=$comprobanteMaxSize){
@@ -27,18 +32,17 @@ if(mysqli_num_rows($verdata)>=1){
             $extPicture=".png";
           break;
         }
-        $comV=ejecutarSQL::consultar("SELECT * FROM venta");
-        $numV=mysqli_num_rows($comV);
-        $comprobanteF="comprobante_".($numV+1).$extPicture;
-        mysqli_free_result($comV);
+          
+        $comprobanteF="comprobante_".($proximaVenta).$extPicture;
+        
         if(!move_uploaded_file($_FILES['comprobante']['tmp_name'], $comprobanteDir.$comprobanteF)){
           echo '<script>swal("ERROR", "No se pudo subir el archivo adjunto", "error");</script>';
           exit();
         }
-      }else{
-        echo '<script>swal("ERROR", "El tamaño del adjunto es muy grande", "error");</script>';
-        exit();
-      }
+        }else{
+          echo '<script>swal("ERROR", "El tamaño del adjunto es muy grande", "error");</script>';
+          exit();
+        }
     }else{
       echo '<script>swal("ERROR", "El formato del adjunto es invalido, por favor verifica e intenta nuevamente", "error");</script>';
       exit();
@@ -46,41 +50,25 @@ if(mysqli_num_rows($verdata)>=1){
   }else{
     $comprobanteF="Sin archivo adjunto";
   }
-  if(!empty($_SESSION['carro'])){
+  
+
     $StatusV="Pendiente";
-    $suma = 0;
-    foreach($_SESSION['carro'] as $codess){
-        $consulta=ejecutarSQL::consultar("SELECT * FROM producto WHERE CodigoProd='".$codess['producto']."'");
-        while($fila = mysqli_fetch_array($consulta, MYSQLI_ASSOC)) {
-          $tp=number_format($fila['Precio']-($fila['Precio']*($fila['Descuento']/100)), 2, '.', '');
-          $suma += $tp*$codess['cantidad'];
-        }
-        mysqli_free_result($consulta);
-    }
-    if(consultasSQL::InsertSQL("venta", "Fecha, RIF, TotalPagar, Estado, NumeroDeposito, TipoEnvio, NombreEnvio, DirEnvio, TlfEnvio, Adjunto", "'".date('d-m-Y')."','$Cedclien','$suma','$StatusV','$NumDepo','$tipoenvio','$nombreenvio','$direnvio','$tlfenvio','$comprobanteF'")){
 
-      /*recuperando el número del pedido actual*/
-      $verId=ejecutarSQL::consultar("SELECT * FROM venta WHERE RIF='$Cedclien' ORDER BY NumPedido desc limit 1");
-      $fila=mysqli_fetch_array($verId, MYSQLI_ASSOC);
-      $Numpedido=$fila['NumPedido'];
+    $total_carrito=ejecutarSQL::consultar("SELECT sum(cantidad*precio) subtotal, round(sum(cantidad*precio)*0.12,2) iva, 
+                                                                   round(sum(cantidad*precio)*1.12,2) total
+                                                                   FROM carrito WHERE cliente='{$_SESSION['UserNIT']}'
+                                                                   GROUP BY cliente");
+    $suma = mysqli_fetch_array($total_carrito, MYSQLI_ASSOC);
 
-      /*Insertando datos en detalle de la venta*/
-      foreach($_SESSION['carro'] as $carro){
-      		$preP=ejecutarSQL::consultar("SELECT * FROM producto WHERE CodigoProd='".$carro['producto']."'");
-      		$filaP=mysqli_fetch_array($preP, MYSQLI_ASSOC);
-          $pref=number_format($filaP['Precio']-($filaP['Precio']*($filaP['Descuento']/100)), 2, '.', '');
-          	consultasSQL::InsertSQL("detalle", "NumPedido, CodigoProd, CantidadProductos, PrecioProd", "'$Numpedido', '".$carro['producto']."', '".$carro['cantidad']."', '$pref'");
-          	mysqli_free_result($preP);
+    /*Insertando venta*/
+    if(consultasSQL::InsertSQL("venta", "Fecha, RIF, TotalPagar, Estado, NumeroDeposito, TipoEnvio, NombreEnvio, DirEnvio, TlfEnvio, Adjunto",
+    "date_format(curdate(),'%d-%m-%Y'),'$Cedclien','{$suma['subtotal']}','$StatusV','$NumDepo','$tipoenvio','$nombreenvio','$direnvio','$tlfenvio','$comprobanteF'")){
 
-        /*Restando stock a cada producto seleccionado en el carrito*/
-        $prodStock=ejecutarSQL::consultar("SELECT * FROM producto WHERE CodigoProd='".$carro['producto']."'");
-        while($fila = mysqli_fetch_array($prodStock, MYSQLI_ASSOC)) {
-            $existencias = $fila['Stock'];
-            $existenciasRest=$carro['cantidad'];
-            consultasSQL::UpdateSQL("producto", "Stock=('$existencias'-'$existenciasRest')", "CodigoProd='".$carro['producto']."'");
-        }
-      }
-      
+     /*Insertando datos en detalles de la venta*/
+            
+      ejecutarSQL::consultar("INSERT INTO detalle (Numpedido,CodigoProd,cantidadproductos,PrecioProd) 
+      (SELECT '{$proximaVenta}',CodigoProd, Cantidad, Precio FROM carrito WHERE cliente='{$Cedclien}')");   
+
       /*Vaciando el carrito*/
       unset($_SESSION['carro']);
       consultasSQL::DeleteSQL('carrito', "Cliente='".$Cedclien."'");
@@ -111,7 +99,3 @@ if(mysqli_num_rows($verdata)>=1){
   }else{
     echo '<script>swal("ERROR", "No has seleccionado ningún producto, revisa el carrito de compras", "error");</script>';
   }
-}/*else{
-    echo '<script>swal("ERROR", "CI/RIF incorrecto, no esta registrado con ningun cliente", "error");</script>';
-}*/
-mysqli_free_result($verdata);

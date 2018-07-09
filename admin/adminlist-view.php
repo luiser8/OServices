@@ -4,11 +4,11 @@
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
         <a href="configAdmin.php?view=admin">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo Administrador
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo Usuario
         </a>
     </li>
     <li>
-        <a href="configAdmin.php?view=adminlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Administradores del sistema</a>
+        <a href="configAdmin.php?view=adminlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Usuarios del Sistema</a>
     </li>
     <li>
         <a href="configAdmin.php?view=account"><i class="fa fa-address-card" aria-hidden="true"></i> &nbsp; Mi cuenta</a>
@@ -19,9 +19,9 @@
         <div class="col-xs-12">
             <br><br>
             <div class="panel panel-info">
-                <div class="panel-heading text-center"><h4>Administradores del sistema</h4></div>
+                <div class="panel-heading text-center"><h4>Usuarios del Sistema</h4></div>
                 <div class="form-group filtro">
-                  <input type="text" class="form-control filtro" placeholder="Busca tus administradores" id="filtro_admin">
+                  <input type="text" class="form-control filtro" placeholder="Buscar Usuario" id="filtro_admin">
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" id="tabla_admin">
@@ -42,10 +42,10 @@
                                 $regpagina = 30;
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                                $administradores=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM administrador WHERE id!='1' LIMIT $inicio, $regpagina");
-                                $alladmin = mysqli_query($mysqli,"SELECT administrador.*, niveles.* 
-                                                                        FROM administrador 
-                                                                            INNER JOIN niveles on administrador.CodNivel = niveles.CodNivel
+                                $administradores=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM usuarios WHERE id!='1' LIMIT $inicio, $regpagina");
+                                $alladmin = mysqli_query($mysqli,"SELECT usuarios.*, niveles.* 
+                                                                        FROM usuarios 
+                                                                            INNER JOIN niveles on usuarios.CodNivel = niveles.CodNivel
                                                                                 WHERE id!='1'");
 
                                 $totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");

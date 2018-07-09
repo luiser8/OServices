@@ -8,7 +8,9 @@ $dirProveUp=consultasSQL::clean_string($_POST['prove-dir']);
 $telProveUp=consultasSQL::clean_string($_POST['prove-tel']);
 $emailProveUp=consultasSQL::clean_string($_POST['prove-email']);
 
-if(consultasSQL::UpdateSQL("proveedor", "NombreProveedor='$nameProveUp',Direccion='$dirProveUp',Telefono='$telProveUp',EmailProv='$emailProveUp'", "RIFProveedor='$rifOldProveUp'")){
+if(ejecutarSQL::Consultar("UPDATE proveedor SET NombreCompleto='{$nameProveUp}',Direccion='{$dirProveUp}',Telefono='{$telProveUp}',
+                            Email='{$emailProveUp}'
+                           WHERE RIFProveedor='{$rifOldProveUp}'")){
     echo '<script>
         swal({
           title: "Proveedor actualizado",

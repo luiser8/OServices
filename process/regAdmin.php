@@ -15,9 +15,9 @@ if($passAdmin1!=$passAdmin2){
 
 $passAdminFinal=md5($passAdmin1);
 
-$verificar=ejecutarSQL::consultar("SELECT * FROM administrador WHERE Nombre='".$nameAdmin."'");
+$verificar=ejecutarSQL::consultar("SELECT * FROM usuarios WHERE Nombre='".$nameAdmin."'");
 if(mysqli_num_rows($verificar)<=0){
-    if(consultasSQL::InsertSQL("administrador", "Nombre, Clave, CodNivel", "'$nameAdmin','$passAdminFinal', '$adminnivel'")){
+    if(consultasSQL::InsertSQL("usuarios", "Nombre, Clave, CodNivel", "'$nameAdmin','$passAdminFinal', '$adminnivel'")){
         echo '<script>
             swal({
               title: "Administrador registrado",

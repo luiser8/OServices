@@ -14,36 +14,58 @@
                   <a href="index.php" class="table-cell-td">Inicio</a>
                   <a href="product.php" class="table-cell-td">Productos</a>
                   <?php
-                      if(!$_SESSION['nombreAdmin']==""){
-                          echo ' 
-                              <a href="carrito.php" class="table-cell-td">Carrito</a>
-                              <a href="configAdmin.php" class="table-cell-td">Administración</a>
-                              <a href="#!" class="table-cell-td exit-system">
-                                  <i class="fa fa-user"></i>&nbsp;&nbsp;'.$_SESSION['nombreAdmin'].'
-                              </a>
-                           ';
-                      }else if(!$_SESSION['nombreUser']==""){
-                          echo ' 
+                        switch($_SESSION['Nivel'])
+                        {
+                            case 1: //administrador
+                            case 5: //gerente
+                                echo ' 
+                                    <!--<a href="carrito.php" class="table-cell-td">Carrito</a>-->
+                                    <a href="configAdmin.php" class="table-cell-td">Administración</a>
+                                    <a href="#!" class="table-cell-td exit-system">
+                                        <i class="fa fa-user"></i>&nbsp;&nbsp;'.$_SESSION['nombre'].'
+                                    </a>
+                                ';
+                                break;
 
-                              <a href="pedido.php" class="table-cell-td">Pedido</a>
-                              <a href="carrito.php" class="table-cell-td">Carrito</a>
-                              <a href="#!" class="table-cell-td exit-system">
-                              <i class="fa fa-user"></i>&nbsp;&nbsp;'.$_SESSION['nombreUser'].'
-                              </a>
-                              <a href="#!" class="table-cell-td userConBtn" data-code="'.$_SESSION['UserRIF'].'">
-                                <i class="glyphicon glyphicon-cog"></i>
-                              </a>
-                           ';
-                      }else{
-                          echo ' 
+                            case 2: //clientes
+                            echo ' 
+                                    <a href="pedido.php" class="table-cell-td">Pedidos</a>
+                                    <a href="carrito.php" class="table-cell-td">Carrito</a>
+                                    <a href="#!" class="table-cell-td exit-system">
+                                    <i class="fa fa-user"></i>&nbsp;&nbsp;'.$_SESSION['nombre'].'
+                                    </a>
+                                    <a href="#!" class="table-cell-td userConBtn" data-code="'.$_SESSION['UserNIT'].'">
+                                        <i class="glyphicon glyphicon-cog"></i>
+                                    </a>
+                                ';
+                                break;
 
-                          <a href="registration.php" class="table-cell-td">Registro</a>
-                              <a href="#" class="table-cell-td" data-toggle="modal" data-target=".modal-login">
-                                  <i class="fa fa-user"></i>&nbsp;&nbsp;Login
-                              </a>
-                           ';
-                      }
-                  ?>
+                                case 3: //tesorero
+                                echo ' 
+                                    <a href="configAdmin.php" class="table-cell-td">Administración</a>
+                                    <a href="#!" class="table-cell-td exit-system">
+                                        <i class="fa fa-user"></i>&nbsp;&nbsp;'.$_SESSION['nombre'].'
+                                    </a>
+                                ';
+                                break;
+                                case 4: //almacenista
+                                echo ' 
+                                    <a href="configAdmin.php" class="table-cell-td">Administración</a>
+                                    <a href="#!" class="table-cell-td exit-system">
+                                        <i class="fa fa-user"></i>&nbsp;&nbsp;'.$_SESSION['nombre'].'
+                                    </a>
+                                ';
+                                break;
+
+                                default:
+                                echo ' 
+                                    <a href="registration.php" class="table-cell-td">Registro</a>
+                                        <a href="#" class="table-cell-td" data-toggle="modal" data-target=".modal-login">
+                                            <i class="fa fa-user"></i>&nbsp;&nbsp;Login
+                                        </a>
+                                ';
+                        }                       
+                 ?>
                 </div>
               </div>
             </div>
@@ -96,23 +118,7 @@
                     <label class="control-label"><span class="glyphicon glyphicon-lock"></span>&nbsp;Contraseña</label>
                     <input type="password" class="form-control" name="clave-login" required="">
                 </div>
-
-                <p>¿Cómo iniciaras sesión?</p>
-               
-                <div class="radio">
-                  <label>
-                      <input type="radio" name="optionsRadios" value="option1" checked="">
-                      Usuario
-                  </label>
-               </div>
-
-               <div class="radio">
-                  <label>
-                      <input type="radio" name="optionsRadios" value="option2">
-                       Administrador
-                  </label>
-               </div>
-               
+    
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary btn-raised btn-sm">Iniciar sesión</button>
                   <button type="button" class="btn btn-danger btn-raised btn-sm" data-dismiss="modal">Cancelar</button>

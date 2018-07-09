@@ -21,6 +21,7 @@ include './library/consulSQL.php';
                     $CodigoProducto=consultasSQL::clean_string($_GET['CodigoProd']);
                     $productoinfo=  ejecutarSQL::consultar("SELECT producto.CodigoProd,producto.NombreProd,producto.CodigoCat,categoria.Nombre,producto.Presentación,producto.Marca,producto.Precio,producto.Descuento,producto.Stock,producto.Imagen FROM categoria INNER JOIN producto ON producto.CodigoCat=categoria.CodigoCat  WHERE CodigoProd='".$CodigoProducto."'");
                     while($fila=mysqli_fetch_array($productoinfo, MYSQLI_ASSOC)){
+                        $precio=number_format(($fila['Precio']-($fila['Precio']*($fila['Descuento']/100))), 2, '.', '');
                         echo '
                             <div class="col-xs-12 col-sm-6">
                                 <h3 class="text-center">Información de producto</h3>
@@ -28,21 +29,30 @@ include './library/consulSQL.php';
                                 <h4><strong>Nombre: </strong>'.$fila['NombreProd'].'</h4><br>
                                 <h4><strong>Presentación: </strong>'.$fila['Presentación'].'</h4><br>
                                 <h4><strong>Marca: </strong>'.$fila['Marca'].'</h4><br>
-                                <h4><strong>Precio: </strong>Bs.S.'.number_format(($fila['Precio']-($fila['Precio']*($fila['Descuento']/100))), 2, '.', '').'</h4><br>
+                                <h4><strong>Precio: </strong>Bs.'.$precio.'</h4><br>
                                 <h4><strong>Cantidad Disponible: </strong>'.$fila['Stock'].'</h4><br>
-                                <h4><strong>Categoria: </strong>'.$fila['Nombre'].'</h4>';
+                                <h4><strong>Categoria: </strong>'.$fila['Nombre'].'</h4></br>';
                                 if($fila['Stock']>=1){
-                                    if($_SESSION['nombreAdmin']!="" || $_SESSION['nombreUser']!=""){
+                                    if($_SESSION['nombre']!=""){
                                         echo '<form action="process/carrito.php" method="POST" class="FormCatElec" data-form="">
                                             <input type="hidden" value="'.$fila['CodigoProd'].'" name="codigo">
-                                            <label class="text-center"><small>Agrega la cantidad de productos que añadiras al carrito de compras (Maximo '.$fila['Stock'].' productos)</small></label>
-                                            <div class="form-group">
+                                            <input type="hidden" value="'.$fila['NombreProd'].'" name="nombre">
+                                            <input type="hidden" value="'.$precio.'" name="precio">
+                                            <input type="hidden" value="'.$fila['Descuento'].'" name="descuento">
+                                            <h4><strong>Cantidad a Solicitar: </strong> (Maximo '.$fila['Stock'].' productos)</h4>
+                                            <!--<label class="text-center"><small>Cantidad </small></label>-->
+                                            <div class="form-group">';
+                                        if($_SESSION['Nivel']==2){
+                                        echo '
                                                 <input type="number" class="form-control" value="1" min="1" max="'.$fila['Stock'].'" name="cantidad">
                                             </div>
-                                            <button class="btn btn-lg btn-raised btn-success btn-block"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp; Añadir al carrito</button>
+                                            <button class="btn btn-lg btn-raised btn-success btn-block"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp; Añadir al carrito</button>';
+                                        }
+                                        echo '
                                         </form>
                                         <div class="ResForm"></div>';
-                                    }else{
+                                    }
+                                    else{
                                         echo '<p class="text-center"><small>Para agregar productos al carrito de compras debes iniciar sesion</small></p><br>   ';
                                         echo '<button class="btn btn-lg btn-raised btn-info btn-block" data-toggle="modal" data-target=".modal-login"><i class="fa fa-user"></i>&nbsp;&nbsp; Iniciar sesion</button>';
                                     }

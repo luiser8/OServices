@@ -6,7 +6,8 @@
 </head>
 
 <body id="container-page-index">
-    <?php include './inc/navbar.php'; ?>
+    <?php 
+     include './inc/navbar.php'; ?>
     
     <section id="slider-store" class="carousel slide" data-ride="carousel" style="padding: 0;">
 
@@ -117,4 +118,5 @@
 
     <?php include './inc/footer.php'; ?>
 </body>
+
 </html>

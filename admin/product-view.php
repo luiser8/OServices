@@ -12,7 +12,7 @@
         <a href="configAdmin.php?view=productlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Inventario</a>
     </li>
 </ul>
-<?php if($_SESSION['Nivel'] == 1){ ?>
+<?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 4 || $_SESSION['Nivel'] == 5 ){ ?>
 <div class="container" ng-app="Oservices">
 	<div class="row">
         <div class="col-xs-12">
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                     </div>
-                <input type="hidden"  name="admin-name" value="<?php echo $_SESSION['nombreAdmin'] ?>">
+                <input type="hidden"  name="admin-name" value="<?php echo $_SESSION['nombre'] ?>">
                 <p class="text-center"><button type="submit" class="btn btn-primary btn-raised">Agregar a la tienda</button></p>
                 </form>
             </div>

@@ -97,7 +97,7 @@ include './library/consulSQL.php';
                              ?>
                              </p>
                              <?php else: ?>
-                              <p>Bs.S.<?php echo $prod['Precio']; ?></p>
+                              <p>Bs. <?php echo $prod['Precio']; ?></p>
                              <?php endif; ?>
                              <p class="text-center">
                                  <a href="infoProd.php?CodigoProd=<?php echo $prod['CodigoProd']; ?>" class="btn btn-primary btn-raised btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; Detalles</a>

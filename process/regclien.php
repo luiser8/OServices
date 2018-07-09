@@ -16,7 +16,9 @@ if(!$rifCliente=="" && !$nameCliente=="" && !$dirCliente=="" && !$phoneCliente==
         $verificar= ejecutarSQL::consultar("SELECT * FROM cliente WHERE RIF='".$rifCliente."'");
         $verificaltotal = mysqli_num_rows($verificar);
         if($verificaltotal<=0){
-            if(consultasSQL::InsertSQL("cliente", "RIF, Nombre, NombreCompleto, Direccion, Clave, Telefono, Email", "'$rifCliente','$nameCliente','$fullnameCliente','$dirCliente', '$passCliente','$phoneCliente','$emailCliente'")){
+            if(consultasSQL::InsertSQL("cliente", "RIF, Nombre, NombreCompleto, Direccion, Clave, Telefono, Email", "'$rifCliente','$nameCliente','$fullnameCliente','$dirCliente', '$passCliente','$phoneCliente','$emailCliente'"))
+            {
+                consultasSQL::InsertSQL("usuarios","nombre,clave,codnivel,rif","'$nameCliente','$passCliente','2','$rifCliente'");
                 echo '<script>
                     swal({
                       title: "Registro completado",

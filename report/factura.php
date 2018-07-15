@@ -25,13 +25,13 @@ $pdf=new PDF('P','mm','Letter');
 $pdf->Ln(20);
 $pdf->AddPage();
 $pdf->SetTitle("Recibo");
-$pdf->SetFont('Arial','B', 14);
-$pdf->Cell(30,10, "Oservices");
-$pdf->SetXY( 120, 15);
-$pdf->SetFont('Arial','B', 12);
-$pdf->Cell( 69, 5, "Factura: N {$id}", 0, 0, 'R');
-$pdf->Ln();
-$pdf->Cell( 190, 8, "Fecha: {$dVenta['Fecha']}", 0, 0, 'R');
+$pdf->SetXY(120, 15);
+$pdf->SetFont('Times','B', 12);
+$pdf->Cell( 72, 0, "Factura: N {$id}", 0, 0, 'R');
+$pdf->SetFont('Times','B', 12);
+$pdf->Image('http://127.0.0.1:1337/OServices/assets/img/logotipo.png',7,10,80);
+$pdf->Ln(10);
+$pdf->Cell( 190, 0, "Fecha: {$dVenta['Fecha']}", 0, 0, 'R');
 $pdf->Ln(20);
 
 $pdf->SetFont("Times","b",12);
@@ -75,13 +75,14 @@ $pdf->SetFont("Times","",12);
 $suma=0;
 $sDet=ejecutarSQL::consultar("SELECT * FROM detalle WHERE NumPedido='".$id."'");
 
-$pdf->SetFont('times','', 12);
+$pdf->SetFont('times','b', 12);
 $pdf->Cell( 12, 8, "Cant", 1,'j','C');
 $pdf->Cell( 59, 8, "Nombre", 1,'j','C');
 $pdf->Cell( 46, 8,utf8_decode('Presentación'), 1,'j','C');
 $pdf->Cell( 28, 8, "Marca", 1,'j','C');
 $pdf->Cell( 26, 8, "Precio", 1,'j','C');
 $pdf->Cell( 26, 8, "Subtotal", 1,'j','C');
+$pdf->SetFont('times','', 12);
 
 while($fila1 = mysqli_fetch_array($sDet, MYSQLI_ASSOC)){
     $consulta=ejecutarSQL::consultar("SELECT * FROM producto WHERE CodigoProd='".$fila1['CodigoProd']."'");
@@ -92,24 +93,23 @@ while($fila1 = mysqli_fetch_array($sDet, MYSQLI_ASSOC)){
     $pdf->Cell (46,8,utf8_decode($fila['Presentación']),1,0,'L');
     $pdf->Cell (28,8,utf8_decode($fila['Marca']),1,0,'L');
     //Con formatos
-    $precio = number_format($fila1['PrecioProd'], 2, '.', '');
+    $precio = number_format($fila1['PrecioProd'], 2, ',', '.');
     $subtotalCalc = $fila1['PrecioProd']*$fila1['CantidadProductos'];
-    $subtotal = number_format($subtotalCalc, 2, '.', '');
+    $subtotal = number_format($subtotalCalc, 2, ',', '.');
 
-    $pdf->Cell (26,8,utf8_decode('$'.$precio),1,0,'L');
-    $pdf->Cell (26,8,utf8_decode('$'.$subtotal),1,0,'L');
+    $pdf->Cell (26,8,utf8_decode('Bs.'.$precio),1,0,'L');
+    $pdf->Cell (26,8,utf8_decode('Bs.'.$subtotal),1,0,'L');
     // $pdf->Ln(10);
     $suma += $fila1['PrecioProd']*$fila1['CantidadProductos'];
-
-
 
     mysqli_free_result($consulta);
 }    
     $pdf->Ln();
     $Ok = number_format($suma, 2, '.', '');
     $iva = ($Ok * 12) / 100;
-    $total = $Ok + $iva; 
-    $pdf->Cell(197,10,"Total a pagar $({$total})",1,0,'R');
+    $totalCalc = $Ok + $iva;
+    $total = number_format($totalCalc, 2, ',', '.');
+    $pdf->Cell(197,10,"Total a pagar Bs.({$total})",1,0,'R');
     $pdf->Ln();
 // $pdf->SetFont("Times","b",12);
 // $pdf->Cell (76,10,utf8_decode(''),1,0,'C');

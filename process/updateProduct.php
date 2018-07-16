@@ -62,7 +62,7 @@ if(consultasSQL::UpdateSQL("producto", "NombreProd='$nameProdUp',CodigoCat='$cat
       },
       function(isConfirm) {
       if (isConfirm) {
-        location.reload();
+        window.location.href = "configAdmin.php?view=productlist";
       } else {
         location.reload();
       }

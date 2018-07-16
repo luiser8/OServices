@@ -16,6 +16,7 @@
 <script src="./js/autohidingnavbar.min.js"></script>
 <script src="./js/sweetalert.min.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
+<script src="./js/moment.js"></script>
 <script src="./js/main.js"></script>
 <!-- Angular -->
 <script src="./js/module.js"></script>

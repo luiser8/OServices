@@ -48,7 +48,7 @@ if(consultasSQL::UpdateSQL("usuarios", $campos, "id='$code'")){
           },
           function(isConfirm) {
           if (isConfirm) {
-            location.reload();
+            window.location.href = "configAdmin.php?view=adminlist";
           } else {
             location.reload();
           }

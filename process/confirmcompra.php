@@ -4,10 +4,20 @@ include '../library/configServer.php';
 include '../library/consulSQL.php';
 $NumDepo=consultasSQL::clean_string($_POST['NumDepo']);
 $tipoenvio=consultasSQL::clean_string($_POST['tipo-envio']);
-$nombreenvio=consultasSQL::clean_string($_POST['nombre-envio']);
-$direnvio=consultasSQL::clean_string($_POST['dir-envio']);
-$tlfenvio=consultasSQL::clean_string($_POST['tlf-envio']);
+if($tipoenvio!='Recoger Por Tienda')
+{
+  $nombreenvio=consultasSQL::clean_string($_POST['nombre-envio']);
+  $direnvio=consultasSQL::clean_string($_POST['dir-envio']);
+  $tlfenvio=consultasSQL::clean_string($_POST['tlf-envio']);
+}
+else
+{
+  $nombreenvio=NULL;
+  $direnvio=NULL;
+  $tlfenvio=NULL;
+}
 $Cedclien=$_SESSION['UserNIT'];
+$cuentabanco=consultasSQL::clean_string($_POST['cuentabancaria']);
 $comprobanteTMP=$_FILES['comprobante']['tmp_name'];
 $comprobanteName=$_FILES['comprobante']['name'];
 //$comprobanteType=$_FILES['comprobante']['type'];
@@ -61,8 +71,8 @@ if($_SESSION['carro']) {
     $suma = mysqli_fetch_array($total_carrito, MYSQLI_ASSOC);
 
     /*Insertando venta*/
-    if(consultasSQL::InsertSQL("venta", "Fecha, RIF, TotalPagar, Estado, NumeroDeposito, TipoEnvio, NombreEnvio, DirEnvio, TlfEnvio, Adjunto",
-    "date_format(curdate(),'%d-%m-%Y'),'$Cedclien','{$suma['subtotal']}','$StatusV','$NumDepo','$tipoenvio','$nombreenvio','$direnvio','$tlfenvio','$comprobanteF'")){
+    if(consultasSQL::InsertSQL("venta", "Fecha, RIF, TotalPagar, Estado, NumeroDeposito, TipoEnvio, NombreEnvio, DirEnvio, TlfEnvio, Adjunto,NumeroCuenta",
+    "curdate(),'$Cedclien','{$suma['subtotal']}','$StatusV','$NumDepo','$tipoenvio','$nombreenvio','$direnvio','$tlfenvio','$comprobanteF','$cuentabanco'")){
 
      /*Insertando datos en detalles de la venta*/
             

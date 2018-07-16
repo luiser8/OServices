@@ -45,7 +45,7 @@
         </div>
         <?php
             if($_SESSION['Nivel']=="2"){
-                $consultaC=ejecutarSQL::consultar("SELECT * FROM venta WHERE RIF='".$_SESSION['UserNIT']."'");
+                $consultaC=ejecutarSQL::consultar("SELECT * FROM ventas WHERE rif='".$_SESSION['UserNIT']."'");
         ?>
             <div class="container" style="margin-top: 70px;">
               <div class="page-header">
@@ -62,7 +62,7 @@
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
-                                        <th>Total</th>
+                                        <th>Total Bs.</th>
                                         <th>Estado</th>
                                         <th>Envío</th>
                                         <th>Destinatario</th>
@@ -77,7 +77,7 @@
                                     ?> 
                                         <tr>
                                             <td><?php echo $rw['Fecha']; ?></td>
-                                            <td>$<?php echo $rw['TotalPagar']; ?></td>
+                                            <td><?php echo $rw['TotalPagar']; ?></td>
                                             <td>
                                             <?php
                                               switch ($rw['Estado']) {
@@ -123,7 +123,7 @@
               echo '<p class="text-center lead">No tienes ningun pedido realizado</p>';
             }
             mysqli_free_result($consultaC);
-        }
+        //}
         ?>
     </section>
     <div class="modal fade" id="PagoModalTran" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -133,88 +133,47 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Pago por transaccion bancaria</h4>
           </div>
-          <div class="modal-body">
-            <?php
-              $consult1=ejecutarSQL::consultar("SELECT * FROM cuentabanco");
-              if(mysqli_num_rows($consult1)>=1){
-                $datBank=mysqli_fetch_array($consult1, MYSQLI_ASSOC);
-            ?>
-            <p>Por favor haga el depósito o transferencia en la siguiente cuenta de banco e ingrese el número de transacción.</p><br>
-            <p>
-              <strong>Nombre del banco:</strong> <?php echo $datBank['NombreBanco']; ?><br>
-              <strong>Número de cuenta:</strong> <?php echo $datBank['NumeroCuenta']; ?><br>
-              <strong>Nombre del beneficiario:</strong> <?php echo $datBank['NombreBeneficiario']; ?><br>
-              <strong>Tipo de cuenta:</strong> <?php echo $datBank['TipoCuenta']; ?><br><br>
-            </p>
-                <?php if($_SESSION['UserType']=="Admin"): ?>
-                <div class="form-group">
-                    <label>Número de deposito o transferencia</label>
-                    <input class="form-control" type="text" name="NumDepo" placeholder="Número de deposito o transferencia" maxlength="50" required="">
-                </div>
-                <div class="form-group">
-                  <span>Tipo De Envío</span>
-                  <select class="form-control" name="tipo-envio" data-toggle="tooltip" data-placement="top" title="Elige El Tipo De Envío">
-                      <option value="" disabled="" selected="">Selecciona una opción</option>
-                      <option value="Recoger Por Tienda">Recoger Por Tienda</option>
-                      <option value="Envío Por Currier 1">Envío Por Tealca</option> 
-                      <option value="Envío Por Currier 2">Envío Por Zoom</option> 
-                      <option value="Envío Por Currier 3">Envío Por Serex</option>
-                 </select>
-                        <div class="form-group label-floating">
-                            <label class="control-label"><i class="fa fa-user"></i>&nbsp; Ingrese nombre completo de quien recibe</label>
-                            <input class="form-control" type="text" required name="nombre-envio" title="Ingrese nombre completo de quien recibe (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
-                        </div>
-                        <div class="form-group label-floating">
-                             <label class="control-label"><i class="fa fa-home"></i>&nbsp; Ingrese dirección a enviar</label>
-                             <input class="form-control" type="text" required name="dir-envio" title="Ingrese la direción o agencia a enviar su pedido" maxlength="100">
-                        </div>                      
-                        <div class="form-group label-floating">
-                             <label class="control-label"><i class="fa fa-mobile"></i>&nbsp; Ingrese un número telefónico</label>
-                             <input class="form-control" type="tel" required name="tlf-envio" maxlength="15" title="Ingrese un número telefónico.">
-                        </div>
-               </div>
-                <div class="form-group">
-                    <label>CI/RIF del cliente</label>
-                    <input class="form-control" type="text" name="Cedclien" placeholder="CI/RIF del cliente" maxlength="15" required="">
-                </div>
-                <div class="form-group">
-                      <input type="file" name="comprobante">
-                      <div class="input-group">
-                        <input type="text" readonly="" class="form-control" placeholder="Seleccione la imagen del comprobante...">
-                          <span class="input-group-btn input-group-sm">
-                            <button type="button" class="btn btn-fab btn-fab-mini">
-                              <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                            </button>
-                          </span>
-                      </div>
-                        <p class="help-block"><small>Tipos de archivos admitidos: .pdf, .jpg y .png. Maximo 5 MB</small></p>
-                    </div>
-                <?php else: ?>
+          <div class="modal-body">            
+                  <div class="form-group"> 
+                  <label>Pagos a nombre de Inversora Oriente Services C.A </label></br>
+                      <select class="form-control" name="cuentabancaria" id="cuentabancaria">
+                                        <option value="">Seleccione Cuenta Bancaria</option>
+                                            <?php
+                                                $bancoc= ejecutarSQL::consultar("SELECT * FROM cuentabanco");
+                                                while($datBank=mysqli_fetch_array($bancoc, MYSQLI_ASSOC)){
+                                                    echo '<option value="'.$datBank['NumeroCuenta'].'">'.$datBank['NombreBanco'].' '.$datBank['TipoCuenta'].' '.$datBank['NumeroCuenta'].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                  </div>
                     <div class="form-group">
-                        <label>Número de depósito o transferencia</label>
-                        <input class="form-control" type="text" name="NumDepo" placeholder="Número de deposito o transferencia" maxlength="50" required="">
+                        <label>Comprobante de Depósito o Transferencia</label></br>
+                        <input class="form-control" type="text" name="NumDepo" placeholder="Ingrese número de comprobante" maxlength="50" required="">
                     </div>
                     <div class="form-group">
-                      <span>Tipo De Envío</span>
-                      <select class="form-control" name="tipo-envio" data-toggle="tooltip" data-placement="top" title="Elige El Tipo De Envío">
+                      <label>Tipo De Envío</label>
+                      <select class="form-control" name="tipo-envio" id="tipo-envio" data-toggle="tooltip" data-placement="top" title="Elige El Tipo De Envío">
                           <option value="" disabled="" selected="">Selecciona una opción</option>
                           <option value="Recoger Por Tienda">Recoger Por Tienda</option>
                           <option value="Envío Por Currier 1">Envío Por Tealca</option> 
                           <option value="Envío Por Currier 2">Envío Por Zoom</option> 
                           <option value="Envío Por Currier 3">Envío Por Serex</option> 
                       </select>
+           
+                    <div id="envio" style="display:none;"> 
                         <div class="form-group label-floating">
                             <label class="control-label"><i class="fa fa-user"></i>&nbsp; Ingrese nombre completo de quien recibe</label>
-                            <input class="form-control" type="text" required name="nombre-envio" title="Ingrese nombre completo de quien recibe (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
+                            <input class="form-control" type="text" value=" " required name="nombre-envio" title="Ingrese nombre completo de quien recibe (solamente letras)" pattern="[a-zA-Z ]{1,50}" maxlength="50">
                         </div>
                         <div class="form-group label-floating">
                              <label class="control-label"><i class="fa fa-home"></i>&nbsp; Ingrese dirección a enviar</label>
-                             <input class="form-control" type="text" required name="dir-envio" title="Ingrese la direción o agencia a enviar su pedido" maxlength="100">
+                             <input class="form-control" type="text" value=" " required name="dir-envio" title="Ingrese la direción o agencia a enviar su pedido" maxlength="100">
                         </div>                      
                         <div class="form-group label-floating">
                              <label class="control-label"><i class="fa fa-mobile"></i>&nbsp; Ingrese un número telefónico</label>
-                             <input class="form-control" type="tel" required name="tlf-envio" maxlength="15" title="Ingrese un número telefónico.">
+                             <input class="form-control" type="tel" value=" " required name="tlf-envio" maxlength="15" title="Ingrese un número telefónico.">
                         </div>
+                   </div>
                    </div>
                     <input type="hidden" name="Cedclien" value="<?php echo $_SESSION['UserNIT']; ?>">
                     <div class="form-group">
@@ -230,7 +189,7 @@
                         <p class="help-block"><small>Tipos de archivos admitidos: .pdf, .jpg y .png. Maximo 5 MB</small></p>
                     </div>
                 <?php 
-                endif;
+                //endif;
               }else{
                 echo "Ocurrio un error: Parece ser que no se ha configurado las cuentas de banco";
               }
@@ -247,4 +206,20 @@
     <div class="ResForm"></div>
     <?php include './inc/footer.php'; ?>
 </body>
+
+<script>
+$(document).ready(function(){
+        $("#tipo-envio").change(function(){
+            var valor = $(this).val();
+            if(valor == 'Selecciona una opción' || valor == 'Recoger Por Tienda'){
+                $("#envio").css("display", "none");
+            }else{
+                $("#envio").css("display", "block");
+            }
+    });
+
+
+</script>
+
 </html>
+

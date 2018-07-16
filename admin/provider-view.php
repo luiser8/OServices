@@ -32,11 +32,22 @@
                                 <legend><i class="fa fa-user"></i> &nbsp; Datos personales</legend>
                               </div>
                               <div class="col-xs-12">
-                                <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; C.I./R.I.F.:</label>
-                                  <input class="form-control" type="text" required name="prove-rif" title="Ingresar C.I. o R.I.F." maxlength="15" >
+                                <div class="form-group">
+                                   <div>
+                                    <label><i class="fa fa-address-card-o" aria-hidden="true"></i>Ingrese su C.I. o R.I.F.:</label>
+                                   </div> 
+                                    <div class="col-xs-2">
+                                    <select class="form-control" name="letra">
+                                    <option value="V">V</option>
+                                    <option value="E">E</option>
+                                    <option value="J">J</option>
+                                    <option value="G">G</option>
+                                    </select>
+                                    </div>
+                                  <div class="col-xs-10">
+                                    <input class="form-control" type="number" required name="clien-rif" title="Ingrese su número de C.I. o R.I.F." maxlength="15" >
+                                  </div>                               
                                 </div>
-                              </div>
                               <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                   <label class="control-label"><i class="fa fa-user"></i>&nbsp; Nombre Completo</label>

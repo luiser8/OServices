@@ -55,7 +55,7 @@
             <?php } ?>
             <?php if($_SESSION['Nivel'] == 1 || $_SESSION['Nivel'] == 3 || $_SESSION['Nivel'] == 5){ ?>
             <li>
-              <a href="configAdmin.php?view=bank">
+              <a href="configAdmin.php?view=banklist">
                 <i class="fa fa-university" aria-hidden="true"></i> &nbsp; Cuentas Bancarias
               </a>
             </li>
@@ -68,7 +68,7 @@
           </ul>
           <?php
             $content=$_GET['view'];
-            $WhiteList=["product","productlist","productinfo","provider","providerlist","providerinfo","category","categorylist","categoryinfo","admin","adminlist","order","bank","account"];
+            $WhiteList=["product","productlist","productinfo","provider","providerlist","providerinfo","category","categorylist","categoryinfo","admin","adminlist","order","bank","account","banklist","bankinfo","verpedidos"];
             if(isset($content)){
               if(in_array($content, $WhiteList) && is_file("./admin/".$content."-view.php")){
                 include "./admin/".$content."-view.php";

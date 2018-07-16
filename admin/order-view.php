@@ -1,11 +1,22 @@
-<div class="container">
+<ul class="breadcrumb" style="margin-bottom: 5px;">
+    <li>
+        <a href="configAdmin.php?view=verpedidos">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Relación de Ventas
+        </a>
+    </li>
+    <li>
+        <a href="configAdmin.php?view=order"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Pedidos</a>
+    </li>
+</ul>
+
+<div>
   <div class="row">
         <div class="col-xs-12">
             <br><br>
             <div class="panel panel-info">
                 <div class="panel-heading text-center"><h4>Pedidos de la tienda</h4></div>
                 <div class="form-group filtro">
-                  <input type="text" class="form-control filtro" placeholder="Busca tus pedidos" id="filtro_pedido">
+                  <input type="text" class="form-control filtro" placeholder="Buscar Pedidos" id="filtro_pedido">
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" id="tabla_pedido">
@@ -15,7 +26,7 @@
                                 <th class="text-center">N. Deposito</th>
                                 <th class="text-center">Fecha</th>
                                 <th class="text-center">Cliente</th>
-                                <th class="text-center">Total</th>
+                                <th class="text-center">Total Bs.</th>
                                 <th class="text-center">Estado</th>
                                 <th class="text-center">Envío</th>
                                 <th class="text-center">Nombre cliente</th>
@@ -36,7 +47,7 @@
                                 $regpagina = 30;
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                                $pedidos=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM venta LIMIT $inicio, $regpagina");
+                                $pedidos=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM ventas LIMIT $inicio, $regpagina");
 
                                 $totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");
                                 $totalregistros = mysqli_fetch_array($totalregistros, MYSQLI_ASSOC);

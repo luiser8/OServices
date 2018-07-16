@@ -3,7 +3,7 @@ session_start();
 include '../library/configServer.php';
 include '../library/consulSQL.php';
 
-$rifProve=consultasSQL::clean_string($_POST['prove-rif']);
+$rifProve=consultasSQL::clean_string($_POST['letra']).consultasSQL::clean_string($_POST['clien-rif']);
 $nameProve=consultasSQL::clean_string($_POST['prove-name']);
 $dirProve=consultasSQL::clean_string($_POST['prove-dir']);
 $telProve=consultasSQL::clean_string($_POST['prove-tel']);
@@ -25,12 +25,12 @@ if(mysqli_num_rows($verificar)<=0){
               closeOnCancel: false
               },
               function(isConfirm) {
-              if (isConfirm) {
-                location.reload();
-              } else {
-                location.reload();
-              }
-            });
+                if (isConfirm) {
+                   window.location.href = "configAdmin.php?view=providerlist";
+                } else {
+                    location.reload();
+                }
+                });
         </script>';
     }else{
        echo '<script>swal("ERROR", "Ocurrió un error inesperado, por favor intente nuevamente", "error");</script>';

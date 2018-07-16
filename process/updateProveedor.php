@@ -25,7 +25,7 @@ if(ejecutarSQL::Consultar("UPDATE proveedor SET NombreCompleto='{$nameProveUp}',
           },
           function(isConfirm) {
           if (isConfirm) {
-            location.reload();
+            window.location.href = "configAdmin.php?view=providerlist";
           } else {
             location.reload();
           }

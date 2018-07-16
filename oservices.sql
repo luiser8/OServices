@@ -34,7 +34,7 @@ CREATE TABLE `carrito` (
   `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `descuento` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`CodCarrito`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('16068389','emiru48','Emir Urbano','81dc9bdb52d04dc20036dbd8313ed055','Puerto la Cruz, Estado Anzoátegui','04148283661','emiru48@gmail.com'),('J123456','pruebax','Pedro Perez','81dc9bdb52d04dc20036dbd8313ed055','Barcelona','555555','hola@gmail.com'),('J1234567','prueba2','Empresa de Prueba','81dc9bdb52d04dc20036dbd8313ed055','Puerto la Cruz, Estado Anzoátegui','123456','micorreo@gmail.com'),('v14477562','sagiro60','Ronal Rodriguez','81dc9bdb52d04dc20036dbd8313ed055','Av. Stadium, C.C. El Cardon, Puerto La Cruz','4265188972','programate@gmail.com');
+INSERT INTO `cliente` VALUES ('14477562','Ronal','Ronal Rodriguez','81dc9bdb52d04dc20036dbd8313ed055','Av. Stadium, C.C. El Cardon, Puerto La Cruz','4265188972','programate@gmail.com'),('16068389','emiru48','Emir Urbano','81dc9bdb52d04dc20036dbd8313ed055','Puerto la Cruz, Estado Anzoátegui','04148283661','emiru48@gmail.com'),('J123456','pruebax','Pedro Perez','81dc9bdb52d04dc20036dbd8313ed055','Barcelona','555555','hola@gmail.com'),('J1234567','prueba2','Empresa de Prueba','81dc9bdb52d04dc20036dbd8313ed055','Puerto la Cruz, Estado Anzoátegui','123456','micorreo@gmail.com'),('V12273142','coronadoc','Carolina Coronado','202cb962ac59075b964b07152d234b70','PLC','12345567','coronadoc@gmail.com'),('v14477562','sagiro60','Ronal Rodriguez','81dc9bdb52d04dc20036dbd8313ed055','Av. Stadium, C.C. El Cardon, Puerto La Cruz','4265188972','programate@gmail.com');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `cuentabanco` (
   `NombreBeneficiario` varchar(100) NOT NULL,
   `TipoCuenta` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `cuentabanco` (
 
 LOCK TABLES `cuentabanco` WRITE;
 /*!40000 ALTER TABLE `cuentabanco` DISABLE KEYS */;
-INSERT INTO `cuentabanco` VALUES (1,'01340062870621035057','Banesco','Inversora Oriente Services CA','Corriente');
+INSERT INTO `cuentabanco` VALUES (1,'01340062870621035057','Banesco','Inversora Oriente Services CA','Corriente'),(6,'1234567','Mercantil','Ronal','');
 /*!40000 ALTER TABLE `cuentabanco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ CREATE TABLE `detalle` (
 
 LOCK TABLES `detalle` WRITE;
 /*!40000 ALTER TABLE `detalle` DISABLE KEYS */;
-INSERT INTO `detalle` VALUES (10,'pa001',1,5000.00),(11,'pa001',2,5000.00),(12,'HG-01',2,20000.00),(12,'pa001',1,5000.00),(15,'p02',2,500000.00),(15,'p02',1,500000.00),(15,'p02',2,500000.00),(15,'p02',1,500000.00),(15,'p02',2,500000.00),(15,'p02',1,500000.00),(24,'pa001',4,5000.00),(31,'HG-01',1,20000.00),(32,'HG-01',1,20000.00),(33,'HG-01',2,20000.00),(33,'p02',2,500000.00);
+INSERT INTO `detalle` VALUES (10,'pa001',1,5000.00),(11,'pa001',2,5000.00),(12,'HG-01',2,20000.00),(12,'pa001',1,5000.00),(15,'p02',2,500000.00),(15,'p02',1,500000.00),(15,'p02',2,500000.00),(15,'p02',1,500000.00),(15,'p02',2,500000.00),(15,'p02',1,500000.00),(24,'pa001',4,5000.00),(31,'HG-01',1,20000.00),(32,'HG-01',1,20000.00),(33,'HG-01',2,20000.00),(33,'p02',2,500000.00),(34,'pa001',1,5000.00),(34,'p02',2,500000.00),(35,'pa001',1,5000.00),(38,'pa001',1,5000.00),(38,'HG-01',2,20000.00),(39,'p02',2,500000.00),(39,'HG-01',1,20000.00);
 /*!40000 ALTER TABLE `detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +207,7 @@ CREATE TABLE `producto` (
   KEY `Agregado` (`Nombre`),
   CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`CodigoCat`) REFERENCES `categoria` (`CodigoCat`) ON UPDATE CASCADE,
   CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`RIFProveedor`) REFERENCES `proveedor` (`RIFProveedor`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'HG-01','Papel Institucional 9','02',20000.00,0,'Bulto de 6 Rollos','PAVECA',120,'305837260','HG-01.jpg','admin','Activo'),(2,'pa001','Resma','01',5000.00,0,'Resma 500 Hojas','Alpes',19,'305837260','pa001.png','admin','Activo'),(3,'p02','opalina','01',500000.00,0,'100 hojas','opal',8,'305837260','p02.jpg','admin','Activo');
+INSERT INTO `producto` VALUES (1,'HG-01','Papel Institucional 9','02',20000.00,0,'Bulto de 6 Rollos','PAVECA',238,'305837260','HG-01.jpg','admin','Activo'),(2,'pa001','Resma','01',5000.00,0,'Resma 500 Hojas','Alpes',18,'305837260','pa001.png','admin','Activo'),(3,'p02','opalina','01',500000.00,0,'100 hojas','opal',8,'305837260','p02.jpg','admin','Activo');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +243,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
-INSERT INTO `proveedor` VALUES ('305837260','Emir Urbano2','Puerto la Cruz, Estado Anzoátegui','04148283661','emiru48@gmail.com');
+INSERT INTO `proveedor` VALUES ('305837260','Emir Urbano2','Puerto la Cruz, Estado Anzoátegui','04148283661','emiru48@gmail.com'),('J39867543','Provenca','Av. Stadium, C.C. El Cardon, Puerto La Cruz','2675544','programate@gmail.com');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +264,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `Nombre_UNIQUE` (`Nombre`),
   UNIQUE KEY `rif_UNIQUE` (`rif`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +273,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3',1,'2018-07-02 14:52:40',NULL),(2,'tesorero','81dc9bdb52d04dc20036dbd8313ed055',3,'2018-07-02 14:57:36',NULL),(3,'emiru48','81dc9bdb52d04dc20036dbd8313ed055',2,'2018-07-02 15:24:44','16068389'),(4,'ronal','81dc9bdb52d04dc20036dbd8313ed055',2,'2018-07-02 17:13:40','J1234567'),(5,'almacenista','81dc9bdb52d04dc20036dbd8313ed055',4,'2018-07-02 20:01:51',NULL),(6,'gerente','81dc9bdb52d04dc20036dbd8313ed055',5,'2018-07-02 20:04:38',NULL),(7,'sagiro60','81dc9bdb52d04dc20036dbd8313ed055',2,'2018-07-08 02:57:50','v14477562'),(8,'tesorero2','81dc9bdb52d04dc20036dbd8313ed055',3,'2018-07-08 03:27:04',NULL);
+INSERT INTO `usuarios` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3',1,'2018-07-02 14:52:40',NULL),(2,'tesorero','81dc9bdb52d04dc20036dbd8313ed055',3,'2018-07-02 14:57:36',NULL),(3,'emiru48','81dc9bdb52d04dc20036dbd8313ed055',2,'2018-07-02 15:24:44','16068389'),(4,'ronal','81dc9bdb52d04dc20036dbd8313ed055',2,'2018-07-02 17:13:40','J1234567'),(5,'almacenista','81dc9bdb52d04dc20036dbd8313ed055',4,'2018-07-02 20:01:51',NULL),(6,'gerente','81dc9bdb52d04dc20036dbd8313ed055',5,'2018-07-02 20:04:38',NULL),(7,'sagiro60','81dc9bdb52d04dc20036dbd8313ed055',2,'2018-07-08 02:57:50','v14477562'),(8,'tesorero2','81dc9bdb52d04dc20036dbd8313ed055',3,'2018-07-08 03:27:04',NULL),(17,'coronadoc','202cb962ac59075b964b07152d234b70',2,'2018-07-13 22:19:27','V12273142');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,20 +286,21 @@ DROP TABLE IF EXISTS `venta`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `venta` (
   `NumPedido` int(20) NOT NULL AUTO_INCREMENT,
-  `Fecha` varchar(150) NOT NULL,
+  `Fecha` date NOT NULL,
   `RIF` varchar(30) NOT NULL,
   `TotalPagar` decimal(30,2) NOT NULL,
   `Estado` varchar(150) NOT NULL,
   `NumeroDeposito` varchar(50) NOT NULL,
   `TipoEnvio` varchar(37) NOT NULL,
-  `NombreEnvio` varchar(70) NOT NULL,
-  `DirEnvio` varchar(200) NOT NULL,
-  `TlfEnvio` varchar(20) NOT NULL,
+  `NombreEnvio` varchar(70) DEFAULT NULL,
+  `DirEnvio` varchar(200) DEFAULT NULL,
+  `TlfEnvio` varchar(20) DEFAULT NULL,
   `Adjunto` varchar(50) NOT NULL,
+  `NumeroCuenta` varchar(100) NOT NULL,
   PRIMARY KEY (`NumPedido`),
   KEY `NIT` (`RIF`),
   CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`RIF`) REFERENCES `cliente` (`RIF`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,9 +309,38 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (10,'04-07-2018','16068389',5000.00,'verificado','565555555555555555','Recoger Por Tienda','Jose','bna','04121805865','Sin archivo adjunto'),(11,'04-07-2018','16068389',10000.00,'verificado','565555555555555555','Recoger Por Tienda','Jose','bna','04121805865','Sin archivo adjunto'),(12,'08-07-2018','V14477562',45000.00,'Pendiente','12345','Recoger Por Tienda','Ronal','Caracas','1234','Sin archivo adjunto'),(13,'08-07-2018','16068389',0.00,'Verificado','1234','Recoger Por Tienda','Yo','PLC','1234','Sin archivo adjunto'),(14,'08-07-2018','v14477562',0.00,'Verificado','543322','Recoger Por Tienda','Ronal','PLC','12345','Sin archivo adjunto'),(15,'08-07-2018','v14477562',0.00,'Verificado','645','Recoger Por Tienda','Ronal','tyr','5345','Sin archivo adjunto'),(16,'08-07-2018','v14477562',1500000.00,'Verificado','7666','Recoger Por Tienda','Ricardo','Bna','456555','Sin archivo adjunto'),(23,'08-07-2018','v14477562',2000000.00,'Verificado','9888','Recoger Por Tienda','Carolina','Lecheria','2671691','Sin archivo adjunto'),(24,'08-07-2018','v14477562',100000.00,'Verificado','99999','Recoger Por Tienda','Ricardo','Aragua','4543333','Sin archivo adjunto'),(31,'08-07-2018','v14477562',20000.00,'Pendiente','534','Recoger Por Tienda','rter','435','435','Sin archivo adjunto'),(32,'08-07-2018','v14477562',20000.00,'Pendiente','456546','Recoger Por Tienda','ertert','3454','ert','Sin archivo adjunto'),(33,'08-07-2018','v14477562',1040000.00,'Verificado','65756','Recoger Por Tienda','raul','345435','435435','Sin archivo adjunto');
+INSERT INTO `venta` VALUES (10,'2018-06-10','16068389',5000.00,'verificado','565555555555555555','Recoger Por Tienda','Jose','bna','04121805865','Sin archivo adjunto','0'),(11,'2018-07-12','16068389',10000.00,'verificado','565555555555555555','Recoger Por Tienda','Jose','bna','04121805865','Sin archivo adjunto','0'),(12,'2018-07-10','V14477562',45000.00,'Pendiente','12345','Recoger Por Tienda','Ronal','Caracas','1234','Sin archivo adjunto','0'),(13,'2018-06-02','16068389',0.00,'Verificado','1234','Recoger Por Tienda','Yo','PLC','1234','Sin archivo adjunto','0'),(14,'2018-07-11','v14477562',0.00,'Verificado','543322','Recoger Por Tienda','Ronal','PLC','12345','Sin archivo adjunto','0'),(15,'2018-06-13','v14477562',0.00,'Verificado','645','Recoger Por Tienda','Ronal','tyr','5345','Sin archivo adjunto','0'),(16,'2018-07-13','v14477562',1500000.00,'Verificado','7666','Recoger Por Tienda','Ricardo','Bna','456555','Sin archivo adjunto','0'),(23,'2018-08-05','v14477562',2000000.00,'Verificado','9888','Recoger Por Tienda','Carolina','Lecheria','2671691','Sin archivo adjunto','0'),(24,'2018-08-03','v14477562',100000.00,'Verificado','99999','Recoger Por Tienda','Ricardo','Aragua','4543333','Sin archivo adjunto','0'),(31,'2018-07-04','v14477562',20000.00,'Pendiente','534','Recoger Por Tienda','rter','435','435','Sin archivo adjunto','0'),(32,'2018-07-13','v14477562',20000.00,'Pendiente','456546','Recoger Por Tienda','ertert','3454','ert','Sin archivo adjunto','0'),(33,'2018-07-19','v14477562',1040000.00,'Verificado','65756','Recoger Por Tienda','raul','345435','435435','Sin archivo adjunto','0'),(34,'2018-06-25','v14477562',1005000.00,'Pendiente','12345','Envío Por Currier 1','Ronal','Caracas','1234','Sin archivo adjunto','0'),(35,'2018-07-14','v14477562',5000.00,'Pendiente','12345','Recoger Por Tienda','','','','Sin archivo adjunto','0'),(38,'2018-07-14','v14477562',45000.00,'Verificado','12345','Recoger Por Tienda','','','','Sin archivo adjunto','01340062870621035057'),(39,'2018-07-15','v14477562',1020000.00,'Pendiente','12345678','Recoger Por Tienda','','','','Sin archivo adjunto','01340062870621035057');
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `ventas`
+--
+
+DROP TABLE IF EXISTS `ventas`;
+/*!50001 DROP VIEW IF EXISTS `ventas`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `ventas` AS SELECT 
+ 1 AS `NumPedido`,
+ 1 AS `FechaO`,
+ 1 AS `Fecha`,
+ 1 AS `TotalPagar`,
+ 1 AS `Estado`,
+ 1 AS `NumeroDeposito`,
+ 1 AS `TipoEnvio`,
+ 1 AS `NombreEnvio`,
+ 1 AS `DirEnvio`,
+ 1 AS `TlfEnvio`,
+ 1 AS `Adjunto`,
+ 1 AS `NumeroCuenta`,
+ 1 AS `RIF`,
+ 1 AS `NombreCompleto`,
+ 1 AS `Nombre`,
+ 1 AS `Email`,
+ 1 AS `Telefono`,
+ 1 AS `Direccion`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `verificado`
@@ -325,7 +355,7 @@ CREATE TABLE `verificado` (
   `Estado` int(11) NOT NULL,
   `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`CodVerf`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,7 +364,7 @@ CREATE TABLE `verificado` (
 
 LOCK TABLES `verificado` WRITE;
 /*!40000 ALTER TABLE `verificado` DISABLE KEYS */;
-INSERT INTO `verificado` VALUES (3,1,1,'0000-00-00 00:00:00'),(4,3,1,'0000-00-00 00:00:00'),(5,4,1,'0000-00-00 00:00:00'),(6,5,1,'0000-00-00 00:00:00'),(7,6,1,'0000-00-00 00:00:00'),(8,7,1,'0000-00-00 00:00:00'),(9,8,1,'0000-00-00 00:00:00'),(10,9,1,'0000-00-00 00:00:00'),(11,10,1,'0000-00-00 00:00:00'),(12,11,1,'0000-00-00 00:00:00'),(13,12,1,'0000-00-00 00:00:00'),(14,13,1,'0000-00-00 00:00:00'),(15,14,1,'0000-00-00 00:00:00'),(16,23,1,'0000-00-00 00:00:00'),(17,24,1,'0000-00-00 00:00:00'),(18,16,1,'0000-00-00 00:00:00'),(19,15,1,'0000-00-00 00:00:00'),(21,33,1,'2018-07-09 01:23:22');
+INSERT INTO `verificado` VALUES (3,1,1,'0000-00-00 00:00:00'),(4,3,1,'0000-00-00 00:00:00'),(5,4,1,'0000-00-00 00:00:00'),(6,5,1,'0000-00-00 00:00:00'),(7,6,1,'0000-00-00 00:00:00'),(8,7,1,'0000-00-00 00:00:00'),(9,8,1,'0000-00-00 00:00:00'),(10,9,1,'0000-00-00 00:00:00'),(11,10,1,'0000-00-00 00:00:00'),(12,11,1,'0000-00-00 00:00:00'),(13,12,1,'0000-00-00 00:00:00'),(14,13,1,'0000-00-00 00:00:00'),(15,14,1,'0000-00-00 00:00:00'),(16,23,1,'0000-00-00 00:00:00'),(17,24,1,'0000-00-00 00:00:00'),(18,16,1,'0000-00-00 00:00:00'),(19,15,1,'0000-00-00 00:00:00'),(21,33,1,'2018-07-09 01:23:22'),(22,38,1,'2018-07-14 22:01:31');
 /*!40000 ALTER TABLE `verificado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,6 +375,24 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'oservices'
 --
+
+--
+-- Final view structure for view `ventas`
+--
+
+/*!50001 DROP VIEW IF EXISTS `ventas`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `ventas` AS select `v`.`NumPedido` AS `NumPedido`,`v`.`Fecha` AS `FechaO`,date_format(`v`.`Fecha`,'%d-%m-%Y') AS `Fecha`,`v`.`TotalPagar` AS `TotalPagar`,`v`.`Estado` AS `Estado`,`v`.`NumeroDeposito` AS `NumeroDeposito`,`v`.`TipoEnvio` AS `TipoEnvio`,`v`.`NombreEnvio` AS `NombreEnvio`,`v`.`DirEnvio` AS `DirEnvio`,`v`.`TlfEnvio` AS `TlfEnvio`,`v`.`Adjunto` AS `Adjunto`,`v`.`NumeroCuenta` AS `NumeroCuenta`,`v`.`RIF` AS `RIF`,`c`.`NombreCompleto` AS `NombreCompleto`,`c`.`Nombre` AS `Nombre`,`c`.`Email` AS `Email`,`c`.`Telefono` AS `Telefono`,`c`.`Direccion` AS `Direccion` from (`venta` `v` join `cliente` `c` on((`v`.`RIF` = `c`.`RIF`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -355,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-09  0:31:02
+-- Dump completed on 2018-07-15 20:46:32

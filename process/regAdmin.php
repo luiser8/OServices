@@ -30,13 +30,13 @@ if(mysqli_num_rows($verificar)<=0){
               closeOnConfirm: false,
               closeOnCancel: false
               },
-              function(isConfirm) {
-              if (isConfirm) {
-                location.reload();
-              } else {
-                location.reload();
-              }
-            });
+                    function(isConfirm) {
+      if (isConfirm) {
+        window.location.href = "configAdmin.php?view=adminlist";
+      } else {
+        location.reload();
+      }
+    });
         </script>';
     }else{
        echo '<script>swal("ERROR", "Ocurrió un error inesperado, por favor intente nuevamente", "error");</script>';

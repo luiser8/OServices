@@ -24,7 +24,7 @@ if(consultasSQL::UpdateSQL("cuentabanco", "NumeroCuenta='$bancoCuenta', NombreBa
     },
     function(isConfirm) {
     if (isConfirm) {
-      location.reload();
+      window.location.href = "configAdmin.php?view=banklist";
     } else {
       location.reload();
     }

@@ -30,7 +30,7 @@
                 <!-- Filtro mejor opcion para busqueda -->
               </div> 
               <div class="form-group filtro">
-                <input type="text" class="form-control" placeholder="Busca tus productos" id="filtro_productos">
+                <input type="text" class="form-control" placeholder="Buscar producto" id="filtro_productos">
               </div>
                 <div class="table-responsive">
                   <table class="table table-striped table-hover" id="tabla_productos">

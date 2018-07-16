@@ -23,7 +23,7 @@ if(consultasSQL::InsertSQL("cuentabanco", "NumeroCuenta, NombreBanco, NombreBene
       },
       function(isConfirm) {
       if (isConfirm) {
-        location.reload();
+        window.location.href = "configAdmin.php?view=banklist";
       } else {
         location.reload();
       }

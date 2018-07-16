@@ -11,8 +11,7 @@
             <div class="page-header">
               <h1><big class="tittles-pages-logo">REGISTRO</big></h1>
             </div>
-            <p class="lead text-center">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident assumenda asperiores architecto nostrum blanditiis excepturi voluptatibus, velit ad enim. Aperiam voluptatum est, fugit quisquam libero distinctio nobis porro numquam minus.
+            <p class="lead text-center">             
             </p>
             <div class="row">
                 <div class="col-sm-5 text-center">
@@ -31,9 +30,21 @@
                                 <legend><i class="fa fa-user"></i> &nbsp; Datos personales</legend>
                               </div>
                               <div class="col-xs-12">
-                                <div class="form-group label-floating">
-                                  <label class="control-label"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; Ingrese su C.I. o R.I.F.:</label>
-                                  <input class="form-control" type="text" required name="clien-rif" title="Ingrese su número de C.I. o R.I.F." maxlength="15" >
+                                <div class="form-group">
+                                   <div>
+                                    <label><i class="fa fa-address-card-o" aria-hidden="true"></i>Ingrese su C.I. o R.I.F.:</label>
+                                   </div> 
+                                    <div class="col-xs-2">
+                                    <select class="form-control" name="letra">
+                                    <option value="V">V</option>
+                                    <option value="E">E</option>
+                                    <option value="J">J</option>
+                                    <option value="G">G</option>
+                                    </select>
+                                    </div>
+                                  <div class="col-xs-10">
+                                    <input class="form-control" type="number" required name="clien-rif" title="Ingrese su número de C.I. o R.I.F." maxlength="15" >
+                                  </div>                               
                                 </div>
                               </div>
                               <div class="col-xs-12">

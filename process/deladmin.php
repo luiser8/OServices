@@ -4,11 +4,11 @@ include '../library/configServer.php';
 include '../library/consulSQL.php';
 
 $code=consultasSQL::clean_string($_POST['admin-code']);
-if(consultasSQL::DeleteSQL('administrador', "id='".$code."'")){
+if(consultasSQL::DeleteSQL('usuarios', "id='{$code}'")){
     echo '<script>
 	    swal({
-	      title: "Administrador eliminado",
-	      text: "El administrador se eliminó con éxito",
+	      title: "Usuario eliminado",
+	      text: "El Usuario se eliminó con éxito",
 	      type: "success",
 	      showCancelButton: true,
 	      confirmButtonClass: "btn-danger",

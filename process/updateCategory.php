@@ -20,7 +20,7 @@ if(consultasSQL::UpdateSQL("categoria", "Nombre='$nameCatUp',Descripcion='$descC
           },
           function(isConfirm) {
           if (isConfirm) {
-            location.reload();
+            window.location.href = "configAdmin.php?view=categorylist";
           } else {
             location.reload();
           }

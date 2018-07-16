@@ -28,7 +28,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                     <label class="control-label">RIF/CEDULA</label>
-                                    <input class="form-control" value="<?php echo $cli['RIFProveedor']; ?>" type="text" name="prove-rif" maxlength="20" required="">
+                                    <input class="form-control" value="<?php echo $cli['RIFProveedor']; ?>" type="text" name="prove-rif" maxlength="20" required="" readonly>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">

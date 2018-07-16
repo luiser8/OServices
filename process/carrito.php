@@ -27,8 +27,13 @@ echo '<script>
         cancelButtonText: "No, seguir comprando",
         closeOnConfirm: false
         },
-        function(){
-            window.location="carrito.php";
+        function(isConfirm) {
+            if (isConfirm) {
+                window.location="carrito.php";
+            } else {
+                window.location="product.php";
+            }
         });
+        
     </script>';
 }

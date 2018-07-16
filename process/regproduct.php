@@ -52,12 +52,12 @@
                                   closeOnCancel: false
                                   },
                                   function(isConfirm) {
-                                  if (isConfirm) {
-                                    location.reload();
-                                  } else {
-                                    location.reload();
-                                  }
-                                });
+                                    if (isConfirm) {
+                                        window.location.href = "configAdmin.php?view=productlist";
+                                    } else {
+                                        location.reload();
+                                    }
+                                    });
                             </script>';
                         }else{
                             echo '<script>swal("ERROR", "Ocurrió un error inesperado, por favor intente nuevamente", "error");</script>';

@@ -70,8 +70,6 @@
 <div id="tablaPedidos" name="tablaPedidos">
 </div>
 
-<?php var_dump($_SESSION['UserNITreporte']);?>
-
 <script>
    $("#filtro_pedido").on("keyup", function() {
     var value = $(this).val().toLowerCase();

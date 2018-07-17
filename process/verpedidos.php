@@ -3,7 +3,6 @@ session_start();
 
 include '../library/configServer.php';
 include '../library/consulSQL.php';
-$_SESSION['UserNITreporte'] = $_POST['Rif'];
 
 ?>
 
@@ -44,13 +43,13 @@ $_SESSION['UserNITreporte'] = $_POST['Rif'];
                             <td class="text-center"><?php echo $order['NumeroDeposito']; ?></td>
                             <td class="text-center"><?php echo $order['NumeroCuenta']; ?></td>                            
                             <td class="text-center"><?php echo $order['TipoEnvio']; ?></td>
-                            <td align="right"><?php echo $order['TotalPagar']; ?></td>
+                            <td align="right"><?php echo number_format($order['TotalPagar'], 2, ',', '.'); ?></td>
                             </tr>
                             <?php } 
                             $total_carrito=ejecutarSQL::consultar("SELECT sum(TotalPagar) subtotal FROM ventas ".$_POST['where']);
                             $suma = mysqli_fetch_array($total_carrito, MYSQLI_ASSOC);?>
                             <tr></tr>
-                            <tfoot><td colspan="7" align="right"><strong>Total Ventas  </td></strong><td align="right"><strong><?php echo $suma['subtotal'];?></strong></td></tfoot>
+                            <tfoot><td colspan="7" align="right"><strong>Total Ventas  </td></strong><td align="right"><strong><?php echo number_format($suma['subtotal'], 2, ',', '.');?></strong></td></tfoot>
                         </tbody>
                     </table>
                 </div>

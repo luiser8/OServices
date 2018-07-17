@@ -15,8 +15,9 @@
     <li>
         <a href="configAdmin.php?view=order"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Pedidos</a>
     </li>
-    <li>
-        <a href="./report/relacion.php" id="imprimirrr" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> &nbsp;Imprimir</i></a>
+    <li id="newPrint">
+       <a id="print" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> &nbsp;Imprimir</i></a>
+       <!-- <a href="./report/relacion.php" id="imprimir" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> &nbsp;Imprimir</i></a>-->
     </li>
 </ul>
 
@@ -69,7 +70,7 @@
 <div id="tablaPedidos" name="tablaPedidos">
 </div>
 
-
+<?php var_dump($_SESSION['UserNITreporte']);?>
 
 <script>
    $("#filtro_pedido").on("keyup", function() {
@@ -110,14 +111,14 @@ $("#consultar").on("click",function(){
    
    //console.log(where); 
 
-
        $.ajax({
               type: "POST",
               url: 'process/verpedidos.php',
               data: {'where':where, 'Rif':rif},
               success: function(respuestaHTML ){
                        $("#tablaPedidos").html( respuestaHTML);
-                       console.log(where);
+                       //$('#newPrint').append('<a id="print" target="_blank" href="./report/relacion.php?rif='+rif+'&before='+fechadesde+'&after='+fechahasta+'">Imprimir</a>');
+                       $('#print').attr('href', './report/relacion.php?rif='+rif+'&before='+fechadesde+'&after='+fechahasta+'');
                }
        });
 });
@@ -136,8 +137,8 @@ $('#imprimirr').click(function(){
                  //$("#tablaPedidos").html( respuestaHTML);
                  console.log(respuestaHTML);
                  
-                 window.location = "./report/relacion.php";
-                 $('#imprimirr').attr('target', '_blank');
+                 //window.location = "./report/relacion.php";
+                 $('#imprimir').attr('target', '_blank');
          }
  	});
 });

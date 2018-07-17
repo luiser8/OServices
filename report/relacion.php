@@ -12,10 +12,11 @@ $pdf=new PDF('P','mm','Letter');
 $pdf->AddPage();
 $pdf->Ln();
 $pdf->SetFont("Times","",10);
-$rif = isset($_POST['Rif']) ? $_POST['Rif'] : '';
-$after = isset($_POST['after']) ? $_POST['after'] : '';
-$before = isset($_POST['before']) ? $_POST['before'] : '';
-$sDet=ejecutarSQL::consultar("SELECT * FROM ventas WHERE Estado='Verificado' AND FechaO BETWEEN '2018-07-01' AND '2018-07-15' AND RIF='V14477562'");
+$rif = isset($_GET['rif']) ? $_GET['rif'] : '';
+$after = isset($_GET['after']) ? $_GET['after'] : '';
+$before = isset($_GET['before']) ? $_GET['before'] : '';
+
+$sDet=ejecutarSQL::consultar("SELECT * FROM ventas WHERE Estado='Verificado' AND FechaO BETWEEN '{$before}' AND '{$after}' AND RIF='{$rif}'");
 //WHERE estado='Verificado' and FechaO between '2018-07-01' and '2018-07-15' and RIF='v14477562'
 
 $pdf->SetFont('times','b', 10);

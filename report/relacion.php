@@ -19,6 +19,7 @@ $sDet=ejecutarSQL::consultar("SELECT * FROM ventas WHERE Estado='Verificado' AND
 //WHERE estado='Verificado' and FechaO between '2018-07-01' and '2018-07-15' and RIF='v14477562'
 
 $pdf->SetFont('times','b', 10);
+$suma=0;
 $pdf->Cell( 18, 5, utf8_decode("N° Pedido"), 1,'j','C');
 $pdf->Cell( 20, 5, "Fecha", 1,'j','C');
 $pdf->Cell( 24, 5,utf8_decode('Rif'), 1,'j','C');
@@ -43,7 +44,12 @@ while($fila1 = mysqli_fetch_array($sDet, MYSQLI_ASSOC)){
     //$pdf->Cell (28,8,$fila1['NumeroCuenta'],1,0,'C');
     $pdf->Cell (40,8,$fila1['TipoEnvio'],1,0,'C');
 
-    $pdf->Cell (26,8,$fila1['TotalPagar'],1,0,'C');
+    $totalPorFila = number_format($fila1['TotalPagar'], 2, ',', '.');
+    $pdf->Cell (26,8,$totalPorFila,1,0,'C');
+    $suma += $fila1['TotalPagar'];
 }
 $pdf->Ln();
+$pdf->Cell(170,10,"Total Bs.",1,0,'R');
+$totalTodo = number_format($suma, 2, ',', '.');
+$pdf->Cell(26,10,"{$totalTodo}",1,0,'R');
 $pdf->Output();

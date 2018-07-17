@@ -6,17 +6,22 @@ include '../library/consulSQL.php';
 
 class PDF extends FPDF{
 }
+
+if(!empty($_GET)){
+    $rif = isset($_GET['rif']) ? $_GET['rif'] : '';
+    $after = isset($_GET['after']) ? $_GET['after'] : '';
+    $before = isset($_GET['before']) ? $_GET['before'] : '';
+    $sDet=ejecutarSQL::consultar("SELECT * FROM ventas WHERE Estado='Verificado' AND FechaO BETWEEN '{$before}' AND '{$after}' AND RIF='{$rif}'");
+}if($_GET['rif'] == ''){
+    $sDet=ejecutarSQL::consultar("SELECT * FROM ventas WHERE Estado='Verificado'");
+}
+
 ob_end_clean();
 $pdf=new PDF('P','mm','Letter');
-
 $pdf->AddPage();
 $pdf->Ln();
 $pdf->SetFont("Times","",10);
-$rif = isset($_GET['rif']) ? $_GET['rif'] : '';
-$after = isset($_GET['after']) ? $_GET['after'] : '';
-$before = isset($_GET['before']) ? $_GET['before'] : '';
 
-$sDet=ejecutarSQL::consultar("SELECT * FROM ventas WHERE Estado='Verificado' AND FechaO BETWEEN '{$before}' AND '{$after}' AND RIF='{$rif}'");
 //WHERE estado='Verificado' and FechaO between '2018-07-01' and '2018-07-15' and RIF='v14477562'
 
 $pdf->SetFont('times','b', 10);
@@ -31,10 +36,6 @@ $pdf->Cell( 40, 8, "Envio", 1,'j','C');
 $pdf->Cell( 26, 8, "Total", 1,'j','C');
 $pdf->SetFont('times','', 10);
 while($fila1 = mysqli_fetch_array($sDet, MYSQLI_ASSOC)){
-    //$ventas=ejecutarSQL::consultar("SELECT * FROM ventas WHERE Estado='Verificado' AND FechaO BETWEEN '2018-07-01' AND '2018-07-15' AND RIF='16068389'");
-    //$fila=mysqli_fetch_array($ventas, MYSQLI_ASSOC);
-    //echo "<pre>";
-    //var_dump($fila1);
     //Con formatos
     $pdf->Ln();
     $pdf->Cell (18,7,$fila1['NumPedido'],1,0,'C');
